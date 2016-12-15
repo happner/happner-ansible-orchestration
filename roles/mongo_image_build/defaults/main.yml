@@ -1,0 +1,7 @@
+mongo_instance_base_name: happn_cluster/baseimage
+mongo_instance_base_tag: "latest"
+mongo_instance_version: ""
+mongo_instance_build_dir: /tmp/mongo_instance
+mongo_instance_extra_tag: latest
+mongo_instance_image_name: mongo_instance
+mongo_instance_image_tag: "{{ mongo_instance_version }}-{{ mongo_instance_iteration }}"
