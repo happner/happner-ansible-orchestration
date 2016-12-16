@@ -41,7 +41,7 @@ WORKDIR /home/happn-cluster
 ### This doesn't need exposing as the Ansible playbook will set up the ports
 #EXPOSE 8005
 
-CMD node index
+CMD node server
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

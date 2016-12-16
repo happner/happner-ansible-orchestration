@@ -2,3 +2,4 @@
 id_rsa
 id_rsa.pub
 examples/happn-cluster/app/node_modules
+node_modules
