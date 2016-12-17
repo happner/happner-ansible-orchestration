@@ -25,14 +25,17 @@ The directory structure of the samples is as follows:
 
 ### Where do I start?
 
-When deploying with Ansible, all things start with a "playbook". In the samples, there are 2 playbooks; one for a cluster deployment
+When deploying with Ansible, all things start with a `playbook`. In the samples, there are 2 playbooks; one for a cluster deployment
  and one for a Mongo server deployment that the cluster nodes require for data storage.
  
-To understand how the sample files relate to each other, start with a *playbook* and you will notice a reference to *roles*. This refers
-to te *roles* directory and a specific sub-directory containing all files required for that playbook to run, eg: *cluster_image_build*.
-The *defaults* sub-directory contains a main.yml file in which default values are set. The *tasks* sub-directory contains a main.yml file
-where all the heavy lifting takes place for the build. The *templates* sub-directory contains the Dockerfile that will be deployed to the
-relevant Docker host, and will build the Docker image, and then start one or more containers based on this.
+To understand how the sample files relate to each other, start with a `playbook`, eg `deploy > playbooks > happn-cluster.yml` 
+and you will notice a reference to `roles`. This refers to the `deploy > roles` directory and a specific sub-directory containing 
+all files required for that playbook to run, eg: `deploy > roles > cluster_image_build`.
+
+The `deploy > roles > cluster_image_build > defaults` sub-directory contains a main.yml file in which default values are set. 
+The `deploy > roles > cluster_image_build > tasks` sub-directory contains a main.yml file where all the heavy lifting takes place 
+for the build. The `deploy > roles > cluster_image_build > templates` sub-directory contains the Dockerfile that will be deployed 
+to the relevant Docker host, and will build the Docker image, and then start one or more containers based on this.
  
 ## Docker automation
 
