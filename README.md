@@ -11,9 +11,6 @@ The directory structure of the samples is as follows:
         + happn-cluster
             + app - a lightweight node app containing minimal code to start a cluster node
             + deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
-        + happner-cluster
-            + app - a lightweight node app containing minimal code to start a cluster node
-            + deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
                 + playbooks - the starting point for kicking off a build
                 + roles 
                     + cluster_image_build - files required to deploy a cluster
@@ -24,6 +21,7 @@ The directory structure of the samples is as follows:
                         + defaults
                         + tasks
                         + templates
+        + happner-cluster - [TODO]
 
 ### Where do I start?
 
