@@ -11,8 +11,10 @@ var port = process.env['PORT_MAPPING'].split(':')[0];
 
 var hosts = [];
 
-var members = process.env['CLUSTER_MEMBERS'] != null ?
-    JSON.parse(process.env['CLUSTER_MEMBERS']) : null;
+//var members = process.env['CLUSTER_MEMBERS'] != null ?
+//    JSON.parse(process.env['CLUSTER_MEMBERS']) : null;
+
+var members = process.env['CLUSTER_MEMBERS'];
 
 for (var x = 0; x < members.length; x++) {
     var current = members[x];
