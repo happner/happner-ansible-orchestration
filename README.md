@@ -1,7 +1,7 @@
 
 # happner-ansible-orchestration
 
-## Premise
+## Introduction
 
 This repo contains a set of sample Ansible scripts and Docker files that can be used for deploying happn and happner clusters.
 
@@ -14,11 +14,28 @@ The directory structure of the samples is as follows:
         + happner-cluster
             + app - a lightweight node app containing minimal code to start a cluster node
             + deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
+                + playbooks - the starting point for kicking off a build
+                + roles 
+                    + cluster_image_build - files required to deploy a cluster
+                        + defaults
+                        + tasks
+                        + templates
+                    + mongo_image_build - files required to deploy a mongo server
+                        + defaults
+                        + tasks
+                        + templates
 
-* The section **Docker automation** below is for if you which to simply deploy a single node using Docker only
-* The section **Ansible deployment and orchestration** is for a fully automated cluster deployment, triggered manually or via
- a build server
+### Where do I start?
 
+When deploying with Ansible, all things start with a "playbook". In the samples, there are 2 playbooks; one for a cluster deployment
+ and one for a Mongo server deployment that the cluster nodes require for data storage.
+ 
+To understand how the sample files relate to each other, start with a *playbook* and you will notice a reference to *roles*. This refers
+to te *roles* directory and a specific sub-directory containing all files required for that playbook to run, eg: *cluster_image_build*.
+The *defaults* sub-directory contains a main.yml file in which default values are set. The *tasks* sub-directory contains a main.yml file
+where all the heavy lifting takes place for the build. The *templates* sub-directory contains the Dockerfile that will be deployed to the
+relevant Docker host, and will build the Docker image, and then start one or more containers based on this.
+ 
 ## Docker automation
 
 The cluster node can be deployed inside a Docker container; the prerequisites for this are as follows:
