@@ -64,9 +64,6 @@ var config = {
     port: port
 };
 
-// list env vars
-console.log(process.env);
-
 // start the cluster
 HappnCluster.create(config)
     .then(function (server) {
