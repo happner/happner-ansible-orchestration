@@ -14,13 +14,13 @@ The directory structure of the samples is as follows:
                 + playbooks - the starting point for kicking off a build
                 + roles 
                     + cluster_image_build - files required to deploy a cluster
-                        + defaults
-                        + tasks
-                        + templates
+                        + defaults - contains a main.yml file in which default values are set
+                        + tasks - all the heavy lifting for the build takes place here
+                        + templates - contains the Dockerfile that will be deployed to the relevant Docker host
                     + mongo_image_build - files required to deploy a mongo server
-                        + defaults
-                        + tasks
-                        + templates
+                        + defaults - contains a main.yml file in which default values are set
+                        + tasks - all the heavy lifting for the build takes place here
+                        + templates - contains the Dockerfile that will be deployed to the relevant Docker host
         + happner-cluster - [TODO]
 
 ### Where do I start?
@@ -30,12 +30,8 @@ When deploying with Ansible, all things start with a `playbook`. In the samples,
  
 To understand how the sample files relate to each other, start with a `playbook`, eg `deploy > playbooks > happn-cluster.yml` 
 and you will notice a reference to `roles`. This refers to the `deploy > roles` directory and a specific sub-directory containing 
-all files required for that playbook to run, eg: `deploy > roles > cluster_image_build`.
-
-The `deploy > roles > cluster_image_build > defaults` sub-directory contains a main.yml file in which default values are set. 
-The `deploy > roles > cluster_image_build > tasks` sub-directory contains a main.yml file where all the heavy lifting takes place 
-for the build. The `deploy > roles > cluster_image_build > templates` sub-directory contains the Dockerfile that will be deployed 
-to the relevant Docker host, and will build the Docker image, and then start one or more containers based on this.
+all files required for that playbook to run, eg: `deploy > roles > cluster_image_build`. You can see how these relate to each
+other in the directory tree above.
  
 ## Docker automation
 
