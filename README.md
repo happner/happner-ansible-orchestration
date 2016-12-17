@@ -7,19 +7,19 @@ This repo contains a set of sample Ansible scripts and Docker files that can be 
 
 The directory structure of the samples is as follows:
 
-examples
-        ↳ happn-cluster
-        	           ↳ app - a lightweight node app containing minimal code to start a cluster node
-        	           ↳ deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
-        ↳ happner-cluster
-                       ↳ app - a lightweight node app containing minimal code to start a cluster node
-                       ↳ deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
+* examples
+    * happn-cluster
+        * app - a lightweight node app containing minimal code to start a cluster node
+        * deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
+    * happner-cluster
+        * app - a lightweight node app containing minimal code to start a cluster node
+        * deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
 
 * The section __Docker automation__ below is for if you which to simply deploy a single node using Docker only
 * The section __Ansible deployment and orchestration__ is for a fully automated cluster deployment, triggered manually or via
  a build server
 
-## Docker automation ()
+## Docker automation
 
 The cluster can be deployed inside a Docker container; the prerequisites for this are as follows:
 
