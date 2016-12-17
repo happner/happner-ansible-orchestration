@@ -11,8 +11,11 @@ var port = process.env['PORT_MAPPING'].split(':')[0];
 
 var hosts = [];
 
-for (var x = 0; x < process.env['CLUSTER_MEMBERS'].length; x++) {
-    var current = process.env['CLUSTER_MEMBERS'][x];
+var members = process.env['CLUSTER_MEMBERS'] != null ?
+    JSON.parse(process.env['CLUSTER_MEMBERS']) : null;
+
+for (var x = 0; x < members.length; x++) {
+    var current = members[x];
 
     hosts.push(current.host + ':' + current.port);
 }
@@ -68,15 +71,15 @@ console.log(process.env);
 HappnCluster.create(config)
     .then(function (server) {
 
-         console.log(server.services.orchestrator.peers);
+        console.log(server.services.orchestrator.peers);
 
-         server.services.orchestrator.on('peer/add', function(member) {
-           console.log('arriving peer\n', member);
-         });
+        server.services.orchestrator.on('peer/add', function (member) {
+            console.log('arriving peer\n', member);
+        });
 
-         server.services.orchestrator.on('peer/remove', function(member) {
-           console.log('departing peer\n', member);
-         });
+        server.services.orchestrator.on('peer/remove', function (member) {
+            console.log('departing peer\n', member);
+        });
 
         process.on('SIGINT', function () {
             server.stop(/*{kill: true, wait: 2000},*/ function () {
