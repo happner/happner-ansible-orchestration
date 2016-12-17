@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "server.js",
   "dependencies": {
-    "happn-cluster": "*"
+    "happn-cluster": "*",
+    "happn-service-mongo-2": "^0.0.2"
   }
 }
