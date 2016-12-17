@@ -15,13 +15,13 @@ The directory structure of the samples is as follows:
             + app - a lightweight node app containing minimal code to start a cluster node
             + deploy - a set of Ansible scripts and Docker file for orchestrating the deployment of the app
 
-* The section __Docker automation__ below is for if you which to simply deploy a single node using Docker only
-* The section __Ansible deployment and orchestration__ is for a fully automated cluster deployment, triggered manually or via
+* The section **Docker automation** below is for if you which to simply deploy a single node using Docker only
+* The section **Ansible deployment and orchestration** is for a fully automated cluster deployment, triggered manually or via
  a build server
 
 ## Docker automation
 
-The cluster can be deployed inside a Docker container; the prerequisites for this are as follows:
+The cluster node can be deployed inside a Docker container; the prerequisites for this are as follows:
 
 ### Install Docker engine on a physical machine or VM (such as AWS):
 
