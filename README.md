@@ -33,54 +33,11 @@ and you will notice a reference to `roles`. This refers to the `deploy > roles` 
 all files required for that playbook to run, eg: `deploy > roles > cluster_image_build`. You can see how these relate to each
 other in the directory tree above.
  
-## Docker automation
 
-The cluster node can be deployed inside a Docker container; the prerequisites for this are as follows:
-
-### Install Docker engine on a physical machine or VM (such as AWS):
-
-* Create your cloud instance (eg: an Ubuntu 14.04 AWS instance)
-* Install the Docker engine on this instance using these instructions: [https://docs.docker.com/engine/installation/linux/ubuntulinux/](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
-
-### Create a Dockerfile for your project
-
-* Create a folder for your Dockerfile on the instance, eg:
-  `> mkdir -p /home/projects/happn-cluster`  
-* Create a Dockerfile:
-  `> cd /home/projects/happn-cluster && touch Dockerfile`
-* Add the contents of the sample Dockerfile found in [https://github.com/happner/happn-cluster/blob/master/docker/staging/Dockerfile](https://github.com/happner/happn-cluster/blob/master/docker/staging/Dockerfile) to this new file
-* You are now ready to kick off a Docker build
-
-### Build a Docker image of the project
-
-#### Staging
-
-* Building the image from the newly created Dockerfile will do the following:
-  * Install Ubuntu version 14.04
-  * Install a specific version of Node (based on parameters passed in to the build) - this defaults to 4.6.2
-  * Clones the repo ([https://github.com/happner/happn-cluster.git](https://github.com/happner/happn-cluster.git))
-  * Runs `> npm install`
-  * Installs MongoDB on the same image as the application
-* To run the build:
-  `> cd /home/projects/happn-cluster && sudo docker build -t happn-cluster:v1 .` (don't forget the '.' at the end!)
-  * This will take some time and will output progress to the terminal
-  
-### Running a container based on the Docker image
-
-* To run a container based on the newly created image, use the following command:
-`> sudo docker run -p 8005:8005 -it --rm happner/happn-cluster:v1`
-...where:
-  * `-p 8005:8005` maps a container port to a port on the AWS instance (this can be whatever port you like, but ensure that the config file of the happn-cluster natches this)
-* This will start the container, and display a shell prompt once started (note that MongoDB will also be started in a forked process, so you may need to wait a few seconds)
-* You are now inside the container
-* To ensure that everything is working as expected, run the tests:
-  `> npm test`
-  * This will kick off all the tests
-  
-  
 ## Ansible deployment and orchestration
 
 Docker is great for building images that can be spun up into containers within seconds. However it is not a deployment or orchestration tool. Ansible enables us to deploy our images to remote Docker hosts and to then spin up containers on demand.
+ For reference, there is a section at the end of this README that gives more detail on Docker builds.
  
 ### Installing Ansible (Ubuntu)
 
@@ -165,6 +122,51 @@ Python 2.7.12
   > ansible-playbook -i hosts -vvvv playbooks/happn-cluster.yml
   ```
 
+## For reference: Docker automation
+
+The cluster node can be deployed inside a Docker container; the prerequisites for this are as follows:
+
+### Install Docker engine on a physical machine or VM (such as AWS):
+
+* Create your cloud instance (eg: an Ubuntu 14.04 AWS instance)
+* Install the Docker engine on this instance using these instructions: [https://docs.docker.com/engine/installation/linux/ubuntulinux/](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
+
+### Create a Dockerfile for your project
+
+* Create a folder for your Dockerfile on the instance, eg:
+  `> mkdir -p /home/projects/happn-cluster`  
+* Create a Dockerfile:
+  `> cd /home/projects/happn-cluster && touch Dockerfile`
+* Add the contents of the sample Dockerfile found in [https://github.com/happner/happn-cluster/blob/master/docker/staging/Dockerfile](https://github.com/happner/happn-cluster/blob/master/docker/staging/Dockerfile) to this new file
+* You are now ready to kick off a Docker build
+
+### Build a Docker image of the project
+
+#### Staging
+
+* Building the image from the newly created Dockerfile will do the following:
+  * Install Ubuntu version 14.04
+  * Install a specific version of Node (based on parameters passed in to the build) - this defaults to 4.6.2
+  * Clones the repo ([https://github.com/happner/happn-cluster.git](https://github.com/happner/happn-cluster.git))
+  * Runs `> npm install`
+  * Installs MongoDB on the same image as the application
+* To run the build:
+  `> cd /home/projects/happn-cluster && sudo docker build -t happn-cluster:v1 .` (don't forget the '.' at the end!)
+  * This will take some time and will output progress to the terminal
+  
+### Running a container based on the Docker image
+
+* To run a container based on the newly created image, use the following command:
+`> sudo docker run -p 8005:8005 -it --rm happner/happn-cluster:v1`
+...where:
+  * `-p 8005:8005` maps a container port to a port on the AWS instance (this can be whatever port you like, but ensure that the config file of the happn-cluster natches this)
+* This will start the container, and display a shell prompt once started (note that MongoDB will also be started in a forked process, so you may need to wait a few seconds)
+* You are now inside the container
+* To ensure that everything is working as expected, run the tests:
+  `> npm test`
+  * This will kick off all the tests
+  
+  
 ### Resources
 
 * Great intro: [https://thornelabs.net/2014/03/08/install-ansible-create-your-inventory-file-and-run-an-ansible-playbook-and-some-ansible-commands.html](https://thornelabs.net/2014/03/08/install-ansible-create-your-inventory-file-and-run-an-ansible-playbook-and-some-ansible-commands.html)
