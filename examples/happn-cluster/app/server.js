@@ -18,7 +18,7 @@ for (var x = 0; x < process.env['CLUSTER_MEMBERS'].length; x++) {
 }
 
 var config = {
-    name: name,
+    name: 'happn-cluster-test',
     secure: true,
     services: {
         security: {

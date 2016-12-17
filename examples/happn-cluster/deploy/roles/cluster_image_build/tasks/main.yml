@@ -27,16 +27,9 @@
 - name: remove git deploy key
   file: dest=/tmp/github_deploy_key state=absent
 
-#- name: archive repo
-#  shell: >
-#    cd "{{ happn_cluster_build_dir }}/{{ item }}" &&
-#    git archive -o ../{{ item }}.tar HEAD
-#  with_items:
-#    - happn_cluster
-
 - name: archive repo
   shell: >
-    cd "{{ happn_cluster_build_dir }}/{{ item }}/happn_cluster/app" &&
+    cd "{{ happn_cluster_build_dir }}/{{ item }}" &&
     git archive -o ../{{ item }}.tar HEAD
   with_items:
     - happn_cluster

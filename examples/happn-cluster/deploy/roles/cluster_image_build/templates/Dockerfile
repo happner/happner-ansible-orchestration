@@ -33,10 +33,10 @@ RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
 RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 
 # Install npm dependencies
-RUN cd /home/happn-cluster && npm install
+RUN cd /home/happn-cluster/examples/happn-cluster/app && npm install
 
 ### Set up working directory
-WORKDIR /home/happn-cluster
+WORKDIR /home/happn-cluster/examples/happn-cluster/app
 
 ### This doesn't need exposing as the Ansible playbook will set up the ports
 #EXPOSE 8005
