@@ -86,17 +86,17 @@ Python 2.7.12
     * Assuming that you saved the keys in the ~/.ssh directory, copy the newly generated PUBLIC key to each Docker host 
     as follows:
     ```
-    cat ~/.ssh/id_rsa.pub | ssh bob@dockerhost 'cat >> .ssh/authorized_keys'
+    cat ~/.ssh/id_rsa.pub | ssh root@dockerhost 'cat >> .ssh/authorized_keys'
     ``` 
-    * The above command will login to the Docker host as "__bob__", and then copy the newly generated public key to the 
+    * The above command will login to the Docker host as __root__, and then copy the newly generated public key to the 
     authorised_keys file
     * Open your Ansible __hosts__ file in the project root, and ensure that the Docker host IP's and SSH credentials 
     are correct, eg:
     ```
     [my_docker_host_group]
-    192.168.1.36 ansible_ssh_user=bob ansible_ssh_private_key_file=~/.ssh/id_rsa
-    192.168.1.37 ansible_ssh_user=bob ansible_ssh_private_key_file=~/.ssh/id_rsa
-    192.168.1.40 ansible_ssh_user=bob ansible_ssh_private_key_file=~/.ssh/id_rsa
+    192.168.1.36 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+    192.168.1.37 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+    192.168.1.40 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
     ....
     ```
       * where each entry is a Docker host
@@ -116,10 +116,10 @@ Python 2.7.12
   ```
   * where the -vvvv switch is the level of verbosity
   
- * Based on the playbook found in the `/playbooks` directory:
+ * Based on the sample happn-cluster playbook found in the `/playbooks` directory:
  
   ```
-  > ansible-playbook -i hosts -vvvv playbooks/happn-cluster.yml
+  > ansible-playbook -i cluster_hosts -vvvv playbooks/happn-cluster.yml
   ```
 
 ## For reference: Docker automation
