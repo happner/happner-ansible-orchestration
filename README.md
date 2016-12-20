@@ -76,7 +76,7 @@ Python 2.7.12
 * Prerequisites: 
   * A "fleet" of Docker hosts (eg: AWS instances with Docker engine installed on each)
   * A build server with Ansible installed
-  * Set up SSH access to the remote hosts using the following process (assuming you are "Bob"):
+  * Set up SSH access to the remote hosts using the following process (assuming you are root):
     * On each host, ensure that the SSH server is running, and that you can access the host via SSH from the build server
     * On your deployment/build server, generate a new SSH key pair (this will be used by Ansible) using:
     ```
