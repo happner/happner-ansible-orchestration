@@ -25,6 +25,7 @@ for (var x = 0; x < members.length; x++) {
 var config = {
     name: 'happn-cluster-test',
     secure: true,
+    port: 57000,  //
     services: {
         security: {
             config: {

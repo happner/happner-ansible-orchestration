@@ -25,8 +25,8 @@
       prompt: "mongo_collection"
       default: "happn_cluster_test"
       private: no
-  vars: # cluster members deployed on each entry in the
-    - happn_cluster_config: "{{ lookup('file', 'cluster_config.json') | from_json }}"
+#  vars: # cluster members deployed on each entry in the
+#    - happn_cluster_config: "{{ lookup('file', 'cluster_config.json') | from_json }}"
 #    - custer_members:
 #      - {id: 1, host: "{{inventory_hostname}}", port: "60000:60000"}
 #      - {id: 2, host: "{{inventory_hostname}}", port: "60001:60001"}

@@ -1,0 +1,40 @@
+{
+  "name": "happn-cluster-test",
+  "secure": true,
+  "port": "#port",
+  "announceHost": "#announceHost",
+  "services": {
+    "security": {
+      "config": {
+        "adminUser": {
+          "username": "_ADMIN",
+          "password": "happn"
+        }
+      }
+    },
+    "data": {
+      "path": "happn-service-mongo-2",
+      "config": {
+        "collection": "mongoCollection",
+        "url": "mongoUrl"
+      }
+    },
+    "orchestrator": {
+      "config": {
+      }
+    },
+    "membership": {
+      "config": {
+        "join": "static",
+        "seed": 1,
+        "port": "port",
+        "hosts": "#hosts"
+      }
+    },
+    "proxy": {
+      "config": {
+        "port": 55000
+      }
+    }
+  }
+}

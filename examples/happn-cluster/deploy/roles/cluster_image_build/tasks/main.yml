@@ -2,6 +2,24 @@
     that:
       - 'happn_cluster_version != ""'
 
+- name: show cluster info gathered from previous playbook
+  debug:
+    msg: "Info - {{happn_cluster_info}}"
+
+- name: set happn_cluster_config variable to config file contents
+  set_fact:
+    happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.json') | string }}"
+
+- name: inject cluster info into happn_cluster_config
+  set_fact:
+    happn_cluster_config: "{{ happn_cluster_config | replace('\"#hosts\"', (happn_cluster_info | string)) }}"
+    happn_cluster_config: "{{ happn_cluster_config | replace('\"#port\"', (happn_cluster_info | string)) }}"
+    happn_cluster_config: "{{ happn_cluster_config | replace('\"#announceHost\"', (happn_cluster_info | string)) }}"
+
+- name: show cluster config
+  debug:
+      msg: "CONFIG - {{ happn_cluster_config }}"
+
 - name: install apt packages
   apt: "name='{{ item }}' state=present"
   with_items:
@@ -40,7 +58,6 @@
     dest="{{ happn_cluster_build_dir }}/{{ item.dest }}"
   with_items:
     - { src: "Dockerfile", dest: "Dockerfile" }
-    #- { src: "runapp.sh", dest: "runapp.sh" }
 
 - name: build image
   docker_image: >
@@ -59,13 +76,14 @@
 # create a container for each member in happn_cluster_members
 - name: run happn-cluster
   docker_container:
-    name: "node_{{item.id}}"
+#    name: "node_{{item.id}}"
+    name: "node_x"
     image: "{{ happn_cluster_image_name }}:{{ happn_cluster_extra_tag }}"
-    published_ports: "{{ item.port }}"
+    published_ports: "{{happn_cluster_config.port}}:{{happn_cluster_config.port}}"
     env:
-      MONGO_URL: "{{ happn_cluster_mongo_url }}"
-      MONGO_COLLECTION: "{{ happn_cluster_mongo_collection }}"
-      PORT_MAPPING: "{{item.port}}"
-      HOST: "{{item.host}}"
-      CLUSTER_MEMBERS: "{{happn_cluster_members}}"
-  with_items: "{{happn_cluster_members}}"
+#      MONGO_URL: "{{ happn_cluster_mongo_url }}"
+#      MONGO_COLLECTION: "{{ happn_cluster_mongo_collection }}"
+#      PORT_MAPPING: "{{happn_cluster_config.port}}:{{happn_cluster_config.port}}"
+#      HOST: "{{current_ip}}"
+
+
