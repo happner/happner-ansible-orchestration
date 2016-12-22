@@ -1,0 +1,5 @@
+
+- name: Gather all hosts info
+  hosts: all
+  roles:
+    - cluster_information

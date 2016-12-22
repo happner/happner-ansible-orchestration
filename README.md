@@ -50,11 +50,7 @@ sudo apt-get install ansible
 
 ### Installing Ansible (OSX)
 
-If you have __Homebrew__ installed, then its just:
-
-`> brew install ansible`
-
-Otherwise, see [https://valdhaus.co/writings/ansible-mac-osx/](https://valdhaus.co/writings/ansible-mac-osx/) for 
+See [https://valdhaus.co/writings/ansible-mac-osx/](https://valdhaus.co/writings/ansible-mac-osx/) for 
 other techniques.
 
 ### Docker host prerequistes
@@ -78,7 +74,7 @@ Python 2.7.12
   * A build server with Ansible installed
   * Set up SSH access to the remote hosts using the following process (assuming you are root):
     * On each host, ensure that the SSH server is running, and that you can access the host via SSH from the build server
-    * On your deployment/build server, generate a new SSH key pair (this will be used by Ansible) using:
+    * If you don't already have an RSA key on your deployment/build server, generate a new SSH key pair (this will be used by Ansible) using:
     ```
     ssh-keygen -t rsa
     ...
@@ -169,9 +165,15 @@ The cluster node can be deployed inside a Docker container; the prerequisites fo
   
 ### Resources
 
+#### Ansible 
+
 * Great intro: [https://thornelabs.net/2014/03/08/install-ansible-create-your-inventory-file-and-run-an-ansible-playbook-and-some-ansible-commands.html](https://thornelabs.net/2014/03/08/install-ansible-create-your-inventory-file-and-run-an-ansible-playbook-and-some-ansible-commands.html)
 * [http://docs.ansible.com/ansible/intro_getting_started.html](http://docs.ansible.com/ansible/intro_getting_started.html)
 * [https://github.com/ansible/ansible](https://github.com/ansible/ansible)
 * [https://github.com/ansible/ansible-examples](https://github.com/ansible/ansible-examples)
 * [https://galaxy.ansible.com/list#/roles](https://galaxy.ansible.com/list#/roles?page=1&page_size=10)
 * [http://www.hashbangcode.com/blog/ansible-ssh-setup-playbook](http://www.hashbangcode.com/blog/ansible-ssh-setup-playbook)
+
+#### Docker
+
+* Docker networking: [http://blog.sequenceiq.com/blog/2014/08/12/docker-networking/](http://blog.sequenceiq.com/blog/2014/08/12/docker-networking/)

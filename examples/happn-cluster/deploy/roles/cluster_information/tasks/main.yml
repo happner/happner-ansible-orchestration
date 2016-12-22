@@ -1,0 +1,14 @@
+
+# get the internal IP of the cloud instance (eg: EC2)
+- name: get instance internal IP
+  shell: >
+    ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'
+  register: current_ip
+
+- name: show ip
+  debug:
+    msg: "IP - {{current_ip.stdout}}"
+
+- name: add item to list
+  set_fact:
+    happn_cluster_info: "{{ happn_cluster_info }} + [ '{{ current_ip.stdout }}' ]"
