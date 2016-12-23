@@ -35,13 +35,13 @@ RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 # Install npm dependencies
 RUN cd /home/happn-cluster/examples/happn-cluster/app && npm install
 
+COPY /tmp/cluster_config_complete.json /home/happn-cluster/examples/happn-cluster/app
+
 ### Set up working directory
 WORKDIR /home/happn-cluster/examples/happn-cluster/app
 
-### This doesn't need exposing as the Ansible playbook will set up the ports
-#EXPOSE 8005
-
-CMD node server
+#CMD node server
+CMD ["/bin/bash"]
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

@@ -32,7 +32,7 @@
 - name: inject variables into happn_cluster_config
   set_fact:
     happn_cluster_config: "{{ happn_cluster_config
-    | replace('\"#hosts\"', (happn_cluster_members | string))
+    | replace('\"#hosts\"', (happn_cluster_members | to_json))
     | replace('\"#announceHost\"', (current_internal_ip | string))
     | replace('\"#port\"', (current_port | string))
     | replace('\"#mongoCollection\"', (happn_cluster_mongo_collection | string))
@@ -41,6 +41,9 @@
 - name: show cluster config
   debug:
       msg: "CONFIG - {{ happn_cluster_config }}"
+
+- name: create temp file
+  local_action: copy content={{ happn_cluster_config }} dest=/tmp/cluster_config_complete.json
 
 - name: install apt packages
   apt: "name='{{ item }}' state=present"
@@ -102,7 +105,7 @@
     name: "node_x"
     image: "{{ happn_cluster_image_name }}:{{ happn_cluster_extra_tag }}"
     published_ports: "{{current_port}}:{{current_port}}"
-    env:
-      CLUSTER_CONFIG: "{{happn_cluster_config}}"
+#    env:
+#      CLUSTER_CONFIG: "{{happn_cluster_config}}"
 
 
