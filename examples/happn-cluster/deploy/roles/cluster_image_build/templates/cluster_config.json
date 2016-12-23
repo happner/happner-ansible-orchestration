@@ -15,8 +15,8 @@
     "data": {
       "path": "happn-service-mongo-2",
       "config": {
-        "collection": "mongoCollection",
-        "url": "mongoUrl"
+        "collection": "#mongoCollection",
+        "url": "#mongoUrl"
       }
     },
     "orchestrator": {
@@ -26,7 +26,8 @@
     "membership": {
       "config": {
         "join": "static",
-        "seed": 1,
+        "seed": true,
+        "seedWait": 1000,
         "port": "port",
         "hosts": "#hosts"
       }

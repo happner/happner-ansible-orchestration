@@ -7,12 +7,6 @@ var HappnCluster = require('happn-cluster');
 // these environment variables are injected into each container by the Ansible/Docker build process
 var mongoCollection = process.env['MONGO_COLLECTION'];
 var mongoUrl = process.env['MONGO_URL'];
-var port = process.env['PORT_MAPPING'].split(':')[0];
-
-var hosts = [];
-
-//var members = process.env['CLUSTER_MEMBERS'] != null ?
-//    JSON.parse(process.env['CLUSTER_MEMBERS']) : null;
 
 var members = process.env['CLUSTER_MEMBERS'];
 
@@ -22,50 +16,7 @@ for (var x = 0; x < members.length; x++) {
     hosts.push(current.host + ':' + current.port);
 }
 
-var config = {
-    name: 'happn-cluster-test',
-    secure: true,
-    port: 57000,  //
-    services: {
-        security: {
-            config: {
-                adminUser: {
-                    username: '_ADMIN',
-                    password: 'happn'
-                }
-            }
-        },
-        data: {
-            path: 'happn-service-mongo-2',
-            config: {
-                collection: mongoCollection,
-                url: mongoUrl
-            }
-        },
-        orchestrator: {
-            config: {
-                // minimumPeers: 6,
-                // replicate: ['/*'], //  ['/something/*', '/else'],
-                // stableReportInterval: 2000,
-                // stabiliseTimeout: 10 * 1000,
-            }
-        },
-        membership: {
-            config: {
-                join: 'static',
-                seed: 1,
-                port: port,
-                hosts: hosts
-            }
-        },
-        proxy: {
-            config: {
-                port: 55000
-            }
-        }
-    },
-    port: port
-};
+var config = JSON.parse(process.env['CLUSTER_CONFIG']);
 
 // start the cluster
 HappnCluster.create(config)

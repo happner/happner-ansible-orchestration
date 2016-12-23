@@ -7,8 +7,21 @@
 
 - name: show ip
   debug:
-    msg: "IP - {{current_ip.stdout}}"
+    msg: "Current internal IP - {{current_ip.stdout}}"
+
+- name: create list item
+  vars:
+    current_entry: {external: "", internal: "", port: ""}
+  set_fact:
+    current_entry:
+      external: "{{inventory_hostname}}"
+      internal: "{{current_ip.stdout}}"
+      port: "{{happn_cluster_seed_port}}"
 
 - name: add item to list
   set_fact:
-    happn_cluster_info: "{{ happn_cluster_info }} + [ '{{ current_ip.stdout }}' ]"
+    happn_cluster_ip_info: "{{ happn_cluster_ip_info | union([current_entry])}}"
+
+- name: increment port
+  set_fact:
+    happn_cluster_seed_port: "{{ happn_cluster_seed_port | int + 1 }}"
