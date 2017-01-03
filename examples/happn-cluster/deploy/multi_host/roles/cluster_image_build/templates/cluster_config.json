@@ -28,7 +28,7 @@
         "join": "static",
         "seed": true,
         "seedWait": 1000,
-        "port": "port",
+        "port": "#port",
         "hosts": "#hosts"
       }
     },

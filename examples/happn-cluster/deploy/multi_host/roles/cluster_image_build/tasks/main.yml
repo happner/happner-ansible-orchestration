@@ -33,17 +33,17 @@
   set_fact:
     happn_cluster_config: "{{ happn_cluster_config
     | replace('\"#hosts\"', (happn_cluster_members | to_json))
-    | replace('\"#announceHost\"', (current_internal_ip | string))
+    | replace('#announceHost', (current_internal_ip | string))
     | replace('\"#port\"', (current_port | string))
-    | replace('\"#mongoCollection\"', (happn_cluster_mongo_collection | string))
-    | replace('\"#mongoUrl\"', (happn_cluster_mongo_url | string)) }}"
+    | replace('#mongoCollection', (happn_cluster_mongo_collection | string))
+    | replace('#mongoUrl', (happn_cluster_mongo_url | string)) }}"
 
 - name: show cluster config
   debug:
       msg: "CONFIG - {{ happn_cluster_config }}"
 
 - name: create temp file
-  local_action: copy content={{ happn_cluster_config }} dest=/tmp/cluster_config_complete.json
+  local_action: copy content={{ happn_cluster_config }} dest=../roles/cluster_image_build/templates/cluster_config_complete.json
 
 - name: install apt packages
   apt: "name='{{ item }}' state=present"
