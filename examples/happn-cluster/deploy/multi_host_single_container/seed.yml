@@ -2,5 +2,5 @@
 - name: gather network info for all hosts
   hosts: all
 
-- include: cluster-info.yml # gather all network info for the hosts
-- include: happn-cluster.yml  # main cluster build
+- include: playbooks/cluster-info.yml # gather all network info for the hosts
+- include: playbooks/happn-cluster.yml  # main cluster build
