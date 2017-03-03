@@ -1,5 +1,5 @@
 
 - name: Gather all hosts info
-  hosts: {{docker_hosts}}
+  hosts: all
   roles:
     - cluster_information

@@ -6,7 +6,7 @@
 
 ---
 - name: Build happn-cluster app image
-  hosts: {{docker_hosts}}
+  hosts: all
   sudo: no
   vars_prompt:
     - name: happn_cluster_version
