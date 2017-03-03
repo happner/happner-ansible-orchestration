@@ -1,6 +1,6 @@
 
 - name: gather network info for all hosts
-  hosts: all
+  hosts: {{docker_hosts}}
 
 - include: cluster-info.yml # gather all network info for the hosts
 - include: happn-cluster.yml  # main cluster build
