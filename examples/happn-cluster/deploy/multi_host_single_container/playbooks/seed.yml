@@ -3,5 +3,5 @@
   hosts: all
 
 - include: set-variables.yml # set some variables
-- include: cluster-info.yml # gather all network info for the hosts
-- include: happn-cluster.yml  # main cluster build
+#- include: cluster-info.yml # gather all network info for the hosts
+#- include: happn-cluster.yml  # main cluster build
