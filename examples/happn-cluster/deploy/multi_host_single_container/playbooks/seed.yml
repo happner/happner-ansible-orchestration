@@ -2,8 +2,11 @@
 - name: gather network info for all hosts
   hosts: all
   pre_tasks:
-    - set_fact:
-        roles_dir: "{{ lookup('pipe','cd ../ && pwd') | string}}/roles" # hack
+    - name: 'get the parent directory'
+      command: {{ lookup('pipe','cd ../ && pwd') | string}}
+      register: parent_dir
   tasks:
-    - include: cluster-info.yml # gather all network info for the hosts
-    - include: happn-cluster.yml  # main cluster build
+    - set_fact: roles_dir = "{{parent_dir}}/roles"
+
+- include: cluster-info.yml # gather all network info for the hosts
+- include: happn-cluster.yml  # main cluster build

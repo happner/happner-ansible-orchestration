@@ -1,6 +1,5 @@
 
 - name: Gather all hosts info
   hosts: all
-
   roles:
     - role: "{{roles_dir}}/cluster_information"
