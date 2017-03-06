@@ -9,9 +9,7 @@
         msg: "Parent: {{ parent_dir }}"
 
 - include: cluster-info.yml # gather all network info for the hosts
-  vars:
-    parent_dir: "{{ parent_dir }}"
+  vars: parent_dir="{{ parent_dir }}"
 
 - include: happn-cluster.yml # main cluster build
-  vars:
-    parent_dir: "{{ parent_dir }}"
+  vars: parent_dir="{{ parent_dir }}"
