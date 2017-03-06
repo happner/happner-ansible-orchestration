@@ -1,5 +1,7 @@
 
 - name: Set some variables
   hosts: all
-  debug:
-    msg: var r="{{lookup('pipe','cd ../ && pwd') | string}}"
+  tasks:
+    - name: 'set var'
+      debug:
+      msg: var r="{{lookup('pipe','cd ../ && pwd') | string}}"
