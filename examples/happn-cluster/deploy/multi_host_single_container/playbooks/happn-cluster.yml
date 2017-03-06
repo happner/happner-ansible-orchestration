@@ -32,5 +32,5 @@
 #      - {id: 2, host: "{{inventory_hostname}}", port: "60001:60001"}
 #      - {id: 3, host: "{{inventory_hostname}}", port: "60002:60002"}
   roles:
-    - { role: "{{playbook_dir}}/roles/cluster_image_build" }
+    - role: "{{playbook_dir}}/roles/cluster_image_build"
 
