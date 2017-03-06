@@ -1,7 +1,6 @@
 
 - name: Gather all hosts info
   hosts: all
-  vars:
-      - roles_dir: "{{ lookup('pipe','dirname `pwd`')|dirname }}/roles"
+
   roles:
     - role: "{{ roles_dir }}/cluster_information"
