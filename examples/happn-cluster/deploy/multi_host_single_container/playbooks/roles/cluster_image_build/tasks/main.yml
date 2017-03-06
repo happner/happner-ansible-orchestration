@@ -9,6 +9,7 @@
 - name: set happn_cluster_config variable to config file contents
   set_fact:
     happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.json') | string }}"
+    happn_cluster_temp_config: "{{ playbook_dir }}/roles/cluster_image_build/templates/cluster_config_complete.json"
 
 - name: create temp vars
   set_fact:
@@ -43,7 +44,7 @@
       msg: "CONFIG - {{ happn_cluster_config }}"
 
 - name: create temp file
-  local_action: copy content={{ happn_cluster_config }} dest={{ playbook_dir }}/templates/cluster_config_complete.json
+  local_action: copy content={{ happn_cluster_config }} dest={{ happn_cluster_temp_config }}
 
 - name: install apt packages
   apt: "name='{{ item }}' state=present"
