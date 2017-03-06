@@ -2,4 +2,4 @@
 - name: Set some variables
   hosts: all
   vars:
-    parent_dir: {{lookup('pipe','cd ../ && pwd') | string}}
+    parent_dir: "{{lookup('pipe','cd ../ && pwd') | string}}"
