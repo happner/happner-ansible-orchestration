@@ -3,10 +3,10 @@
   hosts: all
   vars:
     roles_dir: "{{ lookup('pipe','cd ../ && pwd') }}/roles"
-  tasks:
-    - name: 'show roles path'
-      debug:
-          msg: "Roles dir: {{ var = roles_dir }}"
+#  tasks:
+#    - name: 'show roles path'
+#      debug:
+#          msg: "Roles dir: {{ roles_dir }}"
 
 - include: cluster-info.yml # gather all network info for the hosts
 - include: happn-cluster.yml  # main cluster build
