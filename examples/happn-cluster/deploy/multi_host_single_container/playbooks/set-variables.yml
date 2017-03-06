@@ -2,5 +2,6 @@
 - name: Set some variables
   hosts: all
   tasks:
-  - command: lookup('pipe','cd ../ && pwd') | string
+  - name: 'set parent_dir'
+    command: {{lookup('pipe','cd ../ && pwd') | string}}
     register: parent_dir
