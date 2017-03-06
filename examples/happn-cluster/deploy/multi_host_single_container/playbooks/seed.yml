@@ -3,7 +3,7 @@
   hosts: all
   pre_tasks:
     - name: 'get the parent directory'
-      command: {{ lookup('pipe','cd ../ && pwd') | string}}
+      command: lookup('pipe','cd ../ && pwd') | string
       register: parent_dir
   tasks:
     - set_fact: roles_dir = "{{parent_dir}}/roles"
