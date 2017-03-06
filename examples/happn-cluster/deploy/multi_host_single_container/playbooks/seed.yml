@@ -3,8 +3,7 @@
   hosts: all
   vars:
       - roles_dir: "{{ lookup('pipe','cd ../ && pwd`') }}/roles"
-
-- debug:
+  debug:
     msg: "Roles dir: {{ roles_dir }}"
 
 - include: cluster-info.yml # gather all network info for the hosts
