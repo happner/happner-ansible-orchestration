@@ -4,4 +4,4 @@
   tasks:
     - name: 'set var'
       debug:
-      msg: var r="{{lookup('pipe','cd ../ && pwd') | string}}"
+        msg: var r="{{lookup('pipe','cd ../ && pwd') | string}}"
