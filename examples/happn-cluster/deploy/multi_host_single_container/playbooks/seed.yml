@@ -4,3 +4,6 @@
 
 - include: cluster-info.yml # gather all network info for the hosts
 - include: happn-cluster.yml  # main cluster build
+
+vars:
+  roles_dir: "{{ lookup('pipe','dirname `pwd`')|dirname }}/roles"
