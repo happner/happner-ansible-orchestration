@@ -20,4 +20,4 @@
   vars:
     - ports: "12707:12707"
   roles:
-    - {role: "{{base_path}}/examples/happn-cluster/deploy/multi_host_single_container/roles/mongo_image_build" }
+    - {role: "{{base_path}}/roles/mongo_image_build" }

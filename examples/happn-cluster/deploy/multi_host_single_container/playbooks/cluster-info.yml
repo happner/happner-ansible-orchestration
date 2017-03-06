@@ -2,4 +2,4 @@
 - name: Gather all hosts info
   hosts: all
   roles:
-    - { role: "{{base_path}}/examples/happn-cluster/deploy/multi_host_single_container/roles/cluster_information" }
+    - { role: "{{playbook_dir}}/roles/cluster_information" }
