@@ -2,4 +2,4 @@
 - name: Gather all hosts info
   hosts: all
   roles:
-    - cluster_information
+    - {role: cluster_information, dir: {{playbook_dir}}/roles/cluster_information }

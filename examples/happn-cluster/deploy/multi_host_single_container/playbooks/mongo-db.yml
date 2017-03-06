@@ -20,4 +20,4 @@
   vars:
     - ports: "12707:12707"
   roles:
-    - mongo_image_build
+    - {role: mongo_image_build, dir: {{playbook_dir}}/roles/mongo_image_build }
