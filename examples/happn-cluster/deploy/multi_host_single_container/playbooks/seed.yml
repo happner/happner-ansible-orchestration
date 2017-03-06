@@ -2,8 +2,8 @@
 - name: gather network info for all hosts
   hosts: all
   pre_tasks:
-      - set_fact:
-          roles_dir: "{{ lookup('pipe','cd ../ && pwd') | string}}/roles"
-
-- include: cluster-info.yml # gather all network info for the hosts
-- include: happn-cluster.yml  # main cluster build
+    - set_fact:
+        roles_dir: "{{ lookup('pipe','cd ../ && pwd') | string}}/roles" # hack
+  tasks:
+    - include: cluster-info.yml # gather all network info for the hosts
+    - include: happn-cluster.yml  # main cluster build
