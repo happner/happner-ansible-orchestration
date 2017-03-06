@@ -2,7 +2,5 @@
 - name: Set some variables
   hosts: all
 
-  tasks:
-    - name: 'get the parent directory'
-      command: lookup('pipe','cd ../ && pwd') | string
-      register: parent_dir
+- set_fact:
+    parent_dir: lookup('pipe','cd ../ && pwd') | string
