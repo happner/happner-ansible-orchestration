@@ -7,5 +7,5 @@
       command: lookup('pipe','cd ../ && pwd') | string
       register: parent_dir
 
-  vars:
+  set_fact:
     roles_dir: "{{parent_dir}}/roles"
