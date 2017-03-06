@@ -1,5 +1,5 @@
 
 - name: Set some variables
   hosts: all
-  vars:
-    parent_dir: "{{lookup('pipe','cd ../ && pwd') | string}}"
+  debug:
+    msg: var r="{{lookup('pipe','cd ../ && pwd') | string}}"
