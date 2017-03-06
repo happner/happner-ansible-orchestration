@@ -1,6 +1,8 @@
 
 - name: gather network info for all hosts
   hosts: all
-  set_fact: roles_dir="{{ lookup('pipe','dirname `pwd`')|dirname }}/roles"
+
+- set_fact: roles_dir="{{ lookup('pipe','dirname `pwd`')|dirname }}/roles"
+
 - include: cluster-info.yml # gather all network info for the hosts
 - include: happn-cluster.yml  # main cluster build
