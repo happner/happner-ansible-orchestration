@@ -4,6 +4,6 @@
   vars:
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
   tasks:
-    - name: 'parent'
+    - name: 'parent directory debug'
       debug:
         msg: "Parent: {{ parent_dir }}"

@@ -1,7 +1,12 @@
 
 - name: gather network info for all hosts
   hosts: all
+  vars:
+    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
+  tasks:
+    - name: 'parent directory debug'
+      debug:
+        msg: "Parent: {{ parent_dir }}"
 
-- include: set-variables.yml # set some variables
-#- include: cluster-info.yml # gather all network info for the hosts
-#- include: happn-cluster.yml  # main cluster build
+- include: cluster-info.yml parent_dir={{ parent_dir }} # gather all network info for the hosts
+- include: happn-cluster.yml  parent_dir={{ parent_dir }} # main cluster build
