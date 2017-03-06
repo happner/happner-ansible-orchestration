@@ -3,5 +3,4 @@
   hosts: all
   tasks:
     - name: 'set parent_dir var'
-      set_fact: parent_dir="{{lookup('pipe','cd ../ && pwd') | string}}"
-      when: parent_dir is not defined
+      set_fact: parent_dir="blah" #"{{lookup('pipe','cd ../ && pwd') | string}}"
