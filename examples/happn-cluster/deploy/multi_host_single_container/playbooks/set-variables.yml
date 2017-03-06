@@ -8,4 +8,4 @@
       register: parent_dir
 
   vars:
-    - roles_dir: "{{parent_dir}}/roles"
+    roles_dir: "{{parent_dir}}/roles"
