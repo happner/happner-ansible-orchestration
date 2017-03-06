@@ -6,7 +6,8 @@
       command: lookup('pipe','cd ../ && pwd') | string
       register: parent_dir
     - name: 'set roles directory variable'
-      register: roles_dir="{{parent_dir}}/roles"
+      command: "{{parent_dir}}/roles"
+      register: roles_dir
 
 - include: cluster-info.yml # gather all network info for the hosts
 - include: happn-cluster.yml  # main cluster build
