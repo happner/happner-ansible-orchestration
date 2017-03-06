@@ -1,9 +1,11 @@
 
 - name: Set some variables
   hosts: all
-  pre-tasks:
+
+  tasks:
     - name: 'get the parent directory'
       command: lookup('pipe','cd ../ && pwd') | string
       register: parent_dir
+
   vars:
     - roles_dir: "{{parent_dir}}/roles"
