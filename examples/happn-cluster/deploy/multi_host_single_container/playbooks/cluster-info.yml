@@ -2,4 +2,4 @@
 - name: Gather all hosts info
   hosts: all
   roles:
-    - {role: cluster_information, dir: '../roles/cluster_information'}
+    - cluster_information
