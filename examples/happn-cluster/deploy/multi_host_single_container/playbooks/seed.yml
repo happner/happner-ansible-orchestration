@@ -1,12 +1,10 @@
 
 - name: gather network info for all hosts
   hosts: all
-  vars:
-    roles_dir: "{{ lookup('pipe','cd ../ && pwd') }}/roles"
-#  tasks:
-#    - name: 'show roles path'
-#      debug:
-#          msg: "Roles dir: {{ roles_dir }}"
+  tasks:
+    - name: 'show roles path'
+      set_fact:
+          roles_dir: "{{ lookup('pipe','cd ../ && pwd') | string}}/roles"
 
 - include: cluster-info.yml # gather all network info for the hosts
 - include: happn-cluster.yml  # main cluster build
