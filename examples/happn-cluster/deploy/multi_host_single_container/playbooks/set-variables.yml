@@ -8,4 +8,7 @@
       register: parent_dir
     - name: 'set roles dir'
       set_fact:
-        roles_dir: {{parent_dir}}/roles
+        roles_dir: "{{parent_dir}}/roles"
+    - name: 'display vars'
+      debug:
+        msg: 'Roles dir {{roles_dir}}'

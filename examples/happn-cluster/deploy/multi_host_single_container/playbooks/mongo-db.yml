@@ -20,4 +20,4 @@
   vars:
     - ports: "12707:12707"
   roles:
-    - role: {{roles_dir}}/mongo_image_build
+    - role: "{{roles_dir}}/mongo_image_build"
