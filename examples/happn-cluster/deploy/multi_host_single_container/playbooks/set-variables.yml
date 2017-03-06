@@ -7,8 +7,8 @@
       command: lookup('pipe','cd ../ && pwd') | string
       register: parent_dir
     - name: 'set roles dir'
-      set_fact:
+      vars:
         roles_dir: "{{parent_dir}}/roles"
     - name: 'display vars'
       debug:
-        msg: 'Roles dir {{roles_dir}}'
+        msg: var a = 'Roles dir {{roles_dir}}'
