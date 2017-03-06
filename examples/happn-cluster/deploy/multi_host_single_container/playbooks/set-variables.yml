@@ -1,7 +1,9 @@
 
 - name: Set some variables
   hosts: all
-  tasks:
-    - name: 'set var'
-      debug:
-        msg: var r='{{lookup('pipe','cd ../ && pwd') | string}}'
+  vars:
+    parent_dir: "{{lookup('pipe','cd ../ && pwd') | string}}"
+#  tasks:
+#    - name: 'set var'
+#      set_fact:
+#        parent_dir: "{{lookup('pipe','cd ../ && pwd') | string}}"
