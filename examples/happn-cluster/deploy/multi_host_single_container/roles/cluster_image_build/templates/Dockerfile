@@ -30,7 +30,7 @@ RUN mkdir -p home
 COPY happn_cluster.tar home
 
 # extract tarball
-RUN tar -xvf home/happn_cluster.tar -C home
+RUN tar -xvf home/happn-cluster.tar -C home
 RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
 RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 
