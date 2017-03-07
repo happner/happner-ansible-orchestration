@@ -81,9 +81,7 @@
 #    - happn_cluster
 
 - name: archive repo
-  archive:
-    path: "{{ happn_cluster_build_dir }}/happn_cluster"
-    dest: "{{ happn_cluster_build_dir }}/happn_cluster.tar"
+  command: tar -czvf "{{ happn_cluster_build_dir }}/happn_cluster.tar.gz" "{{ happn_cluster_build_dir }}/happn_cluster"
 
 - name: generate templates
   template: >
