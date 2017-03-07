@@ -26,11 +26,11 @@ ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 ## Create cluster dir and copy tarball
-RUN mkdir -p home/happn-cluster
+RUN mkdir -p home
 COPY happn_cluster.tar home
 
 # extract tarball
-RUN tar -xvf home/happn_cluster.tar -C home/happn-cluster
+RUN tar -xvf home/happn_cluster.tar -C home
 RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
 RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 
