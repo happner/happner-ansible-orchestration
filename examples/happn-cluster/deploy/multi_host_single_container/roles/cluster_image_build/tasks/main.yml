@@ -9,7 +9,7 @@
 - name: set happn_cluster_config variable to config file contents
   set_fact:
     happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.json') | string }}"
-    happn_cluster_app_config: "{{ happn_cluster_build_dir }}/happn_cluster/examples/happn-cluster/app/cluster_config_complete.json"
+    happn_cluster_app_dir: "{{ happn_cluster_build_dir }}/happn_cluster/examples/happn-cluster/app"
 #    happn_cluster_temp_config: "{{ playbook_dir }}/roles/cluster_image_build/templates/cluster_config_complete.json"
 #    happn_cluster_new_config: "{{ happn_cluster_config_dir }}/cluster_config_complete.json"
 
@@ -71,7 +71,7 @@
   file: dest=/tmp/github_deploy_key state=absent
 
 - name: copy new config to app directory
-  command: cp {{ happn_cluster_config }} {{ happn_cluster_app_config }}
+  command: cp {{ happn_cluster_config }} {{ happn_cluster_app_dir }}
 
 - name: archive repo
   shell: >
