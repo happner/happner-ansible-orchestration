@@ -28,7 +28,7 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 ## Create cluster dir and install packages
 RUN mkdir -p home
 
-ADD happn_cluster.tar /home/happn-cluster
+ADD happn_cluster.tar /home
 RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
 RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 
