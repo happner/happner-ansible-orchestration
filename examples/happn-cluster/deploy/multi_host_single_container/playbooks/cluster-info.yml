@@ -2,6 +2,6 @@
 - name: Gather all hosts info
   hosts: all
   vars:
-    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
+    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
   roles:
     - role: "{{ parent_dir }}/roles/cluster_information"
