@@ -77,8 +77,8 @@
 
 - name: save new config to app directory
   copy:
-    src: "{{ happn_cluster_config }}"
-    dest: "{{ happn_cluster_app_dir }}/cluster_config_complete.json"
+    src: {{ happn_cluster_config }}
+    dest: {{ happn_cluster_app_dir }}/cluster_config_complete.json
 
 - name: archive repo
   shell: >
