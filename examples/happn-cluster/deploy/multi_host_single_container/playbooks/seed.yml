@@ -8,16 +8,12 @@
       debug:
         msg: "Parent: {{ parent_dir }}"
 
-    - include: cluster-info.yml parent_dir="{{ parent_dir }}"
+# gather all network info for the hosts
+- include: cluster-info.yml
+  vars:
+    parent_dir: {{ parent_dir }}
 
-    - include: happn-cluster.yml parent_dir="{{ parent_dir }}"
-
-#    # gather all network info for the hosts
-#- include: cluster-info.yml
-#  vars:
-#    parent_dir: "{{ parent_dir }}"
-#
-## main cluster build
-#- include: happn-cluster.yml
-#  vars:
-#    parent_dir: "{{ parent_dir }}"
+# main cluster build
+- include: happn-cluster.yml
+  vars:
+    parent_dir: {{ parent_dir }}
