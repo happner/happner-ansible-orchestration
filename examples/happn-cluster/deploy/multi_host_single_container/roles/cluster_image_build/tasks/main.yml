@@ -70,6 +70,9 @@
   file: dest=/tmp/github_deploy_key state=absent
 
 - name: save new config to app directory
+  file: >
+    dest="{{ happn_cluster_build_dir }}/app"
+    state=directory
   local_action: copy content={{ happn_cluster_config }} dest={{ happn_cluster_new_config }}
 
 - name: archive repo
