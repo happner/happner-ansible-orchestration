@@ -13,8 +13,6 @@
 #    happn_cluster_temp_config: "{{ playbook_dir }}/roles/cluster_image_build/templates/cluster_config_complete.json"
 #    happn_cluster_new_config: "{{ happn_cluster_config_dir }}/cluster_config_complete.json"
 
-- name:
-
 - name: create temp vars
   set_fact:
     current_internal_ip: ""
