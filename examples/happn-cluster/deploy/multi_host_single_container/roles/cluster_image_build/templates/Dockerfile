@@ -25,12 +25,12 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.26.0/install.sh
 ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-## Create cluster dir and install packages
+## Create cluster dir and copy tarball
 RUN mkdir -p home/happn-cluster
-RUN cd home/happn-cluster
+COPY happn_cluster.tar home/happn-cluster
 
-COPY happn_cluster.tar .
-RUN tar -xvf happn_cluster.tar
+# extract tarball
+RUN tar -xvf happn_cluster.tar -C home/happn-cluster
 RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
 RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 
