@@ -73,12 +73,17 @@
     content: "{{ happn_cluster_config }}"
     dest: "{{ happn_cluster_app_dir }}/cluster_config.json"
 
+#- name: archive repo
+#  shell: >
+#    cd "{{ happn_cluster_build_dir }}/{{ item }}" &&
+#    git archive -o ../{{ item }}.tar HEAD
+#  with_items:
+#    - happn_cluster
+
 - name: archive repo
-  shell: >
-    cd "{{ happn_cluster_build_dir }}/{{ item }}" &&
-    git archive -o ../{{ item }}.tar HEAD
-  with_items:
-    - happn_cluster
+  archive:
+    path: "{{ happn_cluster_build_dir }}/happn_cluster"
+    dest: "{{ happn_cluster_build_dir }}/happn_cluster.tar"
 
 - name: generate templates
   template: >
