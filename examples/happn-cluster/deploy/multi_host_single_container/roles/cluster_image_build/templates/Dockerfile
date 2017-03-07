@@ -27,7 +27,7 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 ## Create cluster dir and copy tarball
 RUN mkdir -p home
-COPY happn_cluster.tar home
+COPY happn-cluster.tar home
 
 # extract tarball
 RUN tar -xvf home/happn-cluster.tar -C home
