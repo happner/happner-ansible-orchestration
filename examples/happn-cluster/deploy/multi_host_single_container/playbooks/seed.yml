@@ -10,8 +10,10 @@
 
 # gather all network info for the hosts
 - include: cluster-info.yml
-    parent_dir="{{ parent_dir }}"
+    vars:
+      - parent_dir: "{{ parent_dir }}"
 
 # main cluster build
 - include: happn-cluster.yml
-    parent_dir="{{ parent_dir }}"
+    vars:
+      - parent_dir: "{{ parent_dir }}"
