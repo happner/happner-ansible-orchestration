@@ -7,10 +7,10 @@
     - name: 'parent directory debug'
       debug:
         msg: "Parent: {{ parent_dir }}"
-    - name: 'include cluster-info'
-      include: cluster-info.yml parent_dir="{{ parent_dir }}"
-    - name: 'include happn-cluster-info'
-      include: happn-cluster.yml parent_dir="{{ parent_dir }}"
+
+    - include: cluster-info.yml parent_dir="{{ parent_dir }}"
+
+    - include: happn-cluster.yml parent_dir="{{ parent_dir }}"
 
 #    # gather all network info for the hosts
 #- include: cluster-info.yml
