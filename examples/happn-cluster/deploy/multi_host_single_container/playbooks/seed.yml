@@ -3,10 +3,9 @@
   hosts: all
 #  vars:
 #    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
-
-- set_fact:
-      parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
   tasks:
+    - set_fact:
+      parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
     - name: 'parent directory debug'
       debug:
         msg: "Parent: {{ parent_dir }}"
