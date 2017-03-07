@@ -3,15 +3,15 @@
   hosts: all
 #  vars:
 #    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
-  tasks:
-    - set_fact:
-        parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
-    - name: 'parent directory debug'
-      debug:
-        msg: "Parent: {{ parent_dir }}"
+#  tasks:
+#    - set_fact:
+#        parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
+#    - name: 'parent directory debug'
+#      debug:
+#        msg: "Parent: {{ parent_dir }}"
 
 # gather all network info for the hosts
-- include: cluster-info.yml parent_dir=parent_dir
+- include: cluster-info.yml
 
 # main cluster build
-- include: happn-cluster.yml parent_dir=parent_dir
+- include: happn-cluster.yml

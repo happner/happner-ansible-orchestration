@@ -25,6 +25,8 @@
       prompt: "mongo_collection"
       default: "happn_cluster_test"
       private: no
+  vars:
+    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
 #  vars: # cluster members deployed on each entry in the
 #    - happn_cluster_config: "{{ lookup('file', 'cluster_config.json') | from_json }}"
 #    - custer_members:
