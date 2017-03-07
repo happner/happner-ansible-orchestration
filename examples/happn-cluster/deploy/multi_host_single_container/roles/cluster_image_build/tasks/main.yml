@@ -82,7 +82,7 @@
 
 - name: archive repo
   shell: >
-    tar -cvf "{{ happn_cluster_build_dir }}/happn_cluster.tar" --exclude .git "{{ happn_cluster_build_dir }}/happn_cluster"
+    tar -cvf "{{ happn_cluster_build_dir }}/happn_cluster.tar" --exclude .git -C "{{ happn_cluster_build_dir }}" happn_cluster
 
 - name: generate templates
   template: >
