@@ -5,7 +5,7 @@
 #    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
   tasks:
     - set_fact:
-      parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
+        parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}"
     - name: 'parent directory debug'
       debug:
         msg: "Parent: {{ parent_dir }}"
