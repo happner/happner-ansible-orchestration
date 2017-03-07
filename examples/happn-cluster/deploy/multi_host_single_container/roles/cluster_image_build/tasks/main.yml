@@ -81,7 +81,8 @@
 #    - happn_cluster
 
 - name: archive repo
-  command: >
+  shell: >
+    chmod 755 "{{ happn_cluster_build_dir }}" &&
     tar -cvf "{{ happn_cluster_build_dir }}/happn_cluster.tar" --exclude .git "{{ happn_cluster_build_dir }}/happn_cluster"
 
 - name: generate templates
