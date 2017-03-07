@@ -35,13 +35,13 @@ RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 # Install npm dependencies
 RUN cd /home/happn-cluster/examples/happn-cluster/app && npm install
 
-ADD cluster_config_complete.json /home/happn-cluster/examples/happn-cluster/app
+#ADD cluster_config_complete.json /home/happn-cluster/examples/happn-cluster/app
 
 ### Set up working directory
 WORKDIR /home/happn-cluster/examples/happn-cluster/app
 
-#CMD node server
-CMD ["/bin/bash"]
-
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#CMD node server
+CMD ["/bin/bash"]
