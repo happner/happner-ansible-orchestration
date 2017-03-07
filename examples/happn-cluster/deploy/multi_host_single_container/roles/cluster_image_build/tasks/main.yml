@@ -11,7 +11,9 @@
     happn_cluster_config_dir: "{{ happn_cluster_build_dir }}/happn_cluster/examples/happn_cluster/app"
     happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.json') | string }}"
 #    happn_cluster_temp_config: "{{ playbook_dir }}/roles/cluster_image_build/templates/cluster_config_complete.json"
-    happn_cluster_new_config: "{{ happn_cluster_config_dir }}/cluster_config_complete.json"
+#    happn_cluster_new_config: "{{ happn_cluster_config_dir }}/cluster_config_complete.json"
+
+- name:
 
 - name: create temp vars
   set_fact:
@@ -76,7 +78,7 @@
     state=directory
 
 - name: save new config to app directory
-  local_action: copy content={{ happn_cluster_config }} dest={{ happn_cluster_new_config }}
+  local_action: copy content={{ happn_cluster_config }} dest="{{ happn_cluster_config_dir }}/cluster_config_complete.json"
 
 - name: archive repo
   shell: >
