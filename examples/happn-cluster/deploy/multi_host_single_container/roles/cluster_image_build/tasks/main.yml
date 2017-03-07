@@ -6,12 +6,10 @@
   debug:
     msg: "Info - {{happn_cluster_ip_info}}"
 
-- name: set happn_cluster_config variable to config file contents
+- name: set happn_cluster_config vars
   set_fact:
     happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.json') | string }}"
     happn_cluster_app_dir: "{{ happn_cluster_build_dir }}/happn_cluster/examples/happn-cluster/app"
-#    happn_cluster_temp_config: "{{ playbook_dir }}/roles/cluster_image_build/templates/cluster_config_complete.json"
-#    happn_cluster_new_config: "{{ happn_cluster_config_dir }}/cluster_config_complete.json"
 
 - name: create temp vars
   set_fact:
