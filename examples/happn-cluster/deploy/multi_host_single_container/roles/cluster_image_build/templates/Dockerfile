@@ -29,6 +29,7 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN mkdir -p home
 
 ADD happn_cluster.tar /home
+RUN tar -xvf happn_cluster.tar
 RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
 RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 
