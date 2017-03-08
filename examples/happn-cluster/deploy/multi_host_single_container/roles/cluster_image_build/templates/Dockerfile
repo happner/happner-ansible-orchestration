@@ -31,8 +31,8 @@ COPY happn-cluster.tar home
 
 # extract tarball
 RUN tar -xvf home/happn-cluster.tar -C home
-RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
-RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
+#RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
+#RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
 
 # Install npm dependencies
 RUN cd /home/happn-cluster/examples/happn-cluster/app && npm install
