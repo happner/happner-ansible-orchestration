@@ -31,16 +31,16 @@ COPY happn-cluster.tar home
 
 # extract tarball
 RUN tar -xvf home/happn-cluster.tar -C home
-#RUN echo "{{ happn_cluster_image_tag }}" > /home/happn-cluster/version.txt
-#RUN echo "{{ happn_cluster_repo.after }}" > /home/happn-cluster/git_revision.txt
+RUN echo "{{ happn_cluster_image_tag }}" > /home/happn_cluster/version.txt
+RUN echo "{{ happn_cluster_repo.after }}" > /home/happn_cluster/git_revision.txt
 
 # Install npm dependencies
-RUN cd /home/happn-cluster/examples/happn-cluster/app && npm install
+RUN cd /home/happn_cluster/examples/happn-cluster/app && npm install
 
 #ADD "{{ happn_cluster_app_dir }}/cluster_config.json" /home/happn-cluster/examples/happn-cluster/app
 
 ### Set up working directory
-WORKDIR /home/happn-cluster/examples/happn-cluster/app
+WORKDIR /home/happn_cluster/examples/happn-cluster/app
 
 #CMD node server
 CMD ["/bin/bash"]
