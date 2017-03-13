@@ -8,6 +8,7 @@
 - name: Build Mongo image
   hosts: all
   become: sudo
+  become_user:root
   vars_prompt:
     - name: mongo_instance_version
       prompt: "mongo_instance_version"
