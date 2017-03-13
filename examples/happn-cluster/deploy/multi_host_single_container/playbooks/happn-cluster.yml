@@ -7,7 +7,7 @@
 ---
 - name: Build happn-cluster app image
   hosts: all
-  sudo: no
+  sudo: yes
   vars_prompt:
     - name: happn_cluster_version
       prompt: "happn_cluster_version"
@@ -27,12 +27,6 @@
       private: no
   vars:
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
-#  vars: # cluster members deployed on each entry in the
-#    - happn_cluster_config: "{{ lookup('file', 'cluster_config.json') | from_json }}"
-#    - custer_members:
-#      - {id: 1, host: "{{inventory_hostname}}", port: "60000:60000"}
-#      - {id: 2, host: "{{inventory_hostname}}", port: "60001:60001"}
-#      - {id: 3, host: "{{inventory_hostname}}", port: "60002:60002"}
   roles:
     - role: "{{ parent_dir }}/roles/cluster_image_build"
 
