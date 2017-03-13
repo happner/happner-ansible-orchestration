@@ -7,7 +7,7 @@
 ---
 - name: Build Mongo image
   hosts: all
-  sudo: no
+  become: sudo
   vars_prompt:
     - name: mongo_instance_version
       prompt: "mongo_instance_version"
