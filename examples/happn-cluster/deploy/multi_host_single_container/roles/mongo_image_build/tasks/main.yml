@@ -2,6 +2,14 @@
     that:
       - 'mongo_instance_version != ""'
 
+- name: install apt packages
+  apt: "name='{{ item }}' state=present"
+  with_items:
+    - python-pip
+
+- name: install docker-py
+  pip: name=docker-py version=1.7.0 state=present
+
 - name: create build directory
   file: >
     dest="{{ mongo_instance_build_dir }}"
