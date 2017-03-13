@@ -8,7 +8,7 @@ var HappnCluster = require('happn-cluster');
 
 var fs = require('fs');
 
-fs.readFile('/cluster_config.json', 'utf8', function (err, data) {
+fs.readFile('cluster_config.json', 'utf8', function (err, data) {
     if (err) {
         return console.log(err);
     }
