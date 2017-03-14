@@ -27,18 +27,18 @@ The directory structure of the samples is as follows:
 
 When deploying with Ansible, all things start with a `playbook`. In the samples, there are 2 playbooks; one for a cluster deployment
  and one for a Mongo server deployment that the cluster nodes require for data storage.
- 
+
 To understand how the sample files relate to each other, start with a `playbook`, eg `deploy > playbooks > happn-cluster.yml` 
 and you will notice a reference to `roles`. This refers to the `deploy > roles` directory and a specific sub-directory containing 
 all files required for that playbook to run, eg: `deploy > roles > cluster_image_build`. You can see how these relate to each
 other in the directory tree above.
- 
+
 
 ## Ansible deployment and orchestration
 
 Docker is great for building images that can be spun up into containers within seconds. However it is not a deployment or orchestration tool. Ansible enables us to deploy our images to remote Docker hosts and to then spin up containers on demand.
  For reference, there is a section at the end of this README that gives more detail on Docker builds.
- 
+
 ### Installing Ansible (Ubuntu)
 
 ```
@@ -71,7 +71,28 @@ Python 2.7.12
 
 * Prerequisites: 
   * A "fleet" of Docker hosts (eg: AWS instances with Docker engine installed on each)
+
   * A build server with Ansible installed
+
+  * __NOTE ON CREATING A NEW DEPLOYMENT USER ON DOCKER HOSTS (where `username` is the new user)__:
+
+    * create a new user `sudo adduser username` on the target machine
+
+    * add to sudo users ` sudo usermod -aG sudo username`
+
+    * create authorized_keys file `sudo touch /home/username/authorized_keys`
+
+    * add new SSH public key (generated elsewhere) to authorized_keys
+
+    * chmod the authorized_keys file
+
+      ```
+      sudo chmod 600 .ssh/*
+      sudo chmod 700 .ssh/
+      ```
+
+    * now make sure that the user is also a member of the Docker users group `usermod -aG docker username`
+
   * Set up SSH access to the remote hosts using the following process (assuming you are root):
     * On each host, ensure that the SSH server is running, and that you can access the host via SSH from the build server
     * If you don't already have an RSA key on your deployment/build server, generate a new SSH key pair (this will be used by Ansible) using:
@@ -80,14 +101,14 @@ Python 2.7.12
     ...
     ```
     * Assuming that you saved the keys in the ~/.ssh directory, copy the newly generated PUBLIC key to each Docker host 
-    as follows:
+      as follows:
     ```
     cat ~/.ssh/id_rsa.pub | ssh root@dockerhost 'cat >> .ssh/authorized_keys'
-    ``` 
+    ```
     * The above command will login to the Docker host as __root__, and then copy the newly generated public key to the 
-    authorised_keys file
+      authorised_keys file
     * Open your Ansible __hosts__ file in the project root, and ensure that the Docker host IP's and SSH credentials 
-    are correct, eg:
+      are correct, eg:
     ```
     [my_docker_host_group]
     192.168.1.36 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
@@ -95,8 +116,8 @@ Python 2.7.12
     192.168.1.40 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
     ....
     ```
-      * where each entry is a Docker host
-      * SSH credentials to each is provided alongside the host IP
+    * where each entry is a Docker host
+    * SSH credentials to each is provided alongside the host IP
 
 * Orchestration and build process:
   * Build server (running Ansible) detects when changes are made on a Github repo
@@ -105,15 +126,15 @@ Python 2.7.12
   * Starts a Docker container remotely (including environment variables to set things such as ports, cluster info etc.)
 
 * Commands run on the build server when a repo change is detected:
- * Executing a playbook uses the following pattern:
- 
+* Executing a playbook uses the following pattern:
+
   ```
   > ansible-playbook -i [file containing host list] -vvvv -c [connection type] playbooks/happn-cluster.yml
   ```
-  * where the -vvvv switch is the level of verbosity
-  
- * Based on the sample happn-cluster playbook found in the `/playbooks` directory:
- 
+* where the -vvvv switch is the level of verbosity
+
+* Based on the sample happn-cluster playbook found in the `/playbooks` directory:
+
   ```
   > ansible-playbook -i cluster_hosts -vvvv playbooks/happn-cluster.yml
   ```
@@ -149,20 +170,19 @@ The cluster node can be deployed inside a Docker container; the prerequisites fo
 * To run the build:
   `> cd /home/projects/happn-cluster && sudo docker build -t happn-cluster:v1 .` (don't forget the '.' at the end!)
   * This will take some time and will output progress to the terminal
-  
+
 ### Running a container based on the Docker image
 
 * To run a container based on the newly created image, use the following command:
-`> sudo docker run -p 8005:8005 -it --rm happner/happn-cluster:v1`
-...where:
+  `> sudo docker run -p 8005:8005 -it --rm happner/happn-cluster:v1`
+  ...where:
   * `-p 8005:8005` maps a container port to a port on the AWS instance (this can be whatever port you like, but ensure that the config file of the happn-cluster natches this)
 * This will start the container, and display a shell prompt once started (note that MongoDB will also be started in a forked process, so you may need to wait a few seconds)
 * You are now inside the container
 * To ensure that everything is working as expected, run the tests:
   `> npm test`
   * This will kick off all the tests
-  
-  
+
 ### Resources
 
 #### Ansible 

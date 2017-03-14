@@ -1,0 +1,24 @@
+#
+# SEE:
+# https://fangpenlin.com/posts/2014/08/11/building-docker-image-with-ansible/
+# http://docs.ansible.com/ansible/docker_module.html
+# https://github.com/ansible/ansible/blob/devel/docsite/rst/guide_docker.rst
+
+---
+- name: Build Mongo image
+  hosts: all
+  become: sudo
+  vars_prompt:
+    - name: mongo_instance_version
+      prompt: "mongo_instance_version"
+      default: "1.0.0"
+      private: no
+    - name: mongo_instance_iteration
+      prompt: "mongo_instance_iteration"
+      default: 1
+      private: no
+  vars:
+    - ports: "12707:12707"
+    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
+  roles:
+    - role: "{{ parent_dir }}/roles/mongo_image_build"
