@@ -3,7 +3,7 @@
   hosts: all
   vars:
     - happn_cluster_ip_info: []
-    - happn_cluster_seed_port: 57000
+#    - happn_cluster_seed_port: 57000
 
 # gather all network info for the hosts
 - include: cluster-info.yml
