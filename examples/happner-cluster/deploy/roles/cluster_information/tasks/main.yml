@@ -33,3 +33,7 @@
 - name: show current port number
   debug:
     msg: "Current port number - {{happn_cluster_seed_port}}"
+
+- name: show hostvars
+  debug:
+    msg: "hostvars - {{hostvars}}"
