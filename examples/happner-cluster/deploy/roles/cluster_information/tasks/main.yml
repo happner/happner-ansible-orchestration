@@ -31,7 +31,7 @@
 - name: Set host number
   command: 'touch file{{ host_num.stdout }}'
 
-- name:as
+- name: Set happn_cluster_seed_port
   set_fact:
     happn_cluster_seed_port: "{{host_num | int}}"
 
