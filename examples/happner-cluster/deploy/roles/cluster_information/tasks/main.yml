@@ -20,7 +20,7 @@
 
 - name: show hostvars
   debug:
-    msg: "hostvars - {{hostvars['all']}}"
+    msg: "hostvars - {{hostvars[0]}}"
 
 - name: populate array of happn_cluster_ip_info
   set_fact:
