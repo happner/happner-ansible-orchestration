@@ -13,7 +13,7 @@
     - happn_cluster_iteration: 1
     - mongo_db: "{{inventory_mongo_db}}"
     - mongo_url: "mongodb://{{inventory_mongo_ip}}:27017"
-    - mongo_collection: "happn_cluster"
+    - mongo_collection: "happner_cluster"
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
   roles:
     - role: "{{ parent_dir }}/roles/cluster_image_build"
