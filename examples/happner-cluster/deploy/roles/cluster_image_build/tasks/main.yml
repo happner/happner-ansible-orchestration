@@ -35,7 +35,7 @@
     happn_cluster_config: "{{ happn_cluster_config
     | replace('\"#seed\"', (current_seed | string))
     | replace('\"#hosts\"', (happn_cluster_ip_info | to_json))
-#    | replace('#announceHost', (current_internal_ip | string))
+    | replace('#announceHost', ('abc' | string))
     | replace('\"#port\"', (current_port | string))
     | replace('#mongoCollection', (happn_cluster_mongo_collection | string))
     | replace('#mongoUrl', (happn_cluster_mongo_url | string)) }}"
