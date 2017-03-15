@@ -4,6 +4,6 @@
   "main": "server.js",
   "dependencies": {
     "happner-cluster": "*",
-    "happn-service-mongo-2": "^0.0.2"
+    "happn-service-mongo-2": "^1.0.1"
   }
 }
