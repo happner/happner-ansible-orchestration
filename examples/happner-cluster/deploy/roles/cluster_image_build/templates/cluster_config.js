@@ -11,11 +11,11 @@ module.exports = {
                 config: {
                     datastores: [
                         {
-                            name: 'mongo',
-                            provider: 'happn-service-mongo-2',
+                            name: "mongo",
+                            provider: "happn-service-mongo-2",
                             isDefault: true,
                             settings: {
-                                database: '#mongoDb',
+                                database: "#mongoDb",
                                 collection: "#mongoCollection",
                                 url: "#mongoUrl"
                             }
