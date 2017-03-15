@@ -117,7 +117,5 @@
     name: "node_x"
     image: "{{ happn_cluster_image_name }}:{{ happn_cluster_extra_tag }}"
     published_ports: "{{current_port}}:{{current_port}}"
-#    env:
-#      CLUSTER_CONFIG: "{{happn_cluster_config}}"
 
 

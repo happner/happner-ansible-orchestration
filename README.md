@@ -74,7 +74,7 @@ Python 2.7.12
 
   * A build server with Ansible installed
 
-  * __NOTE ON CREATING A NEW DEPLOYMENT USER ON DOCKER HOSTS (where `username` is the new user)__:
+  * __NOTE ON CREATING A NEW DEPLOYMENT USER ON DOCKER HOSTS(where `username` is the new user)__:
 
     * create a new user `sudo adduser username` on the target machine
 
@@ -138,6 +138,73 @@ Python 2.7.12
   ```
   > ansible-playbook -i cluster_hosts -vvvv playbooks/happn-cluster.yml
   ```
+
+
+
+## For reference: Nginx installation
+
+- Install Nginx:
+
+  - https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04
+
+- Generate a self-signed SSL certificate (don't do this in production!):
+
+  - https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-16-04
+
+- Modify `/etc/nginx/sites-enabled/default` to set up SSL and map ports:
+
+  ```javascript
+  server {
+          listen 443 ssl default_server;
+          listen [::]:443 ssl default_server;
+  	
+      	server_name [your-aws-instance].eu-west-1.compute.amazonaws.com;
+      	ssl_certificate /etc/ssl/certs/server.crt;
+      	ssl_certificate_key /etc/ssl/private/server.key;
+
+    		location / {
+                  proxy_pass http://127.0.0.1:3000;
+                  proxy_redirect    off;
+                  proxy_set_header  X-Forwarded-For $remote_addr;
+  		}
+
+  		location ~ /semaphore {
+                  proxy_pass http://127.0.0.1:3000;
+                  proxy_redirect    off;
+                  proxy_set_header  X-Forwarded-For $remote_addr;
+          }
+
+          location ~ /semaphore/(?<section>.*) {
+                  proxy_pass http://127.0.0.1:3000/$section;
+                  proxy_redirect    off;
+                  proxy_set_header  X-Forwarded-For $remote_addr; 
+          }
+
+          location ~ /public/(?<section>.*) {
+                  proxy_pass http://127.0.0.1:3000/public/$section;
+                  proxy_redirect    off;
+                  proxy_set_header  X-Forwarded-For $remote_addr;
+          }
+
+  	# allow websocket connection upgrades
+          location ~ /api/(?<section>.*) {
+                  proxy_pass http://127.0.0.1:3000/api/$section;
+                  proxy_http_version 1.1;
+                  proxy_set_header Upgrade $http_upgrade;
+                  proxy_set_header Connection "upgrade";	#$connection_upgrade;
+  				proxy_set_header Origin "";
+          }
+
+  		location ~ /auth/(?<section>.*) {
+                  proxy_pass http://127.0.0.1:3000/api/$section;
+                  proxy_redirect    off;
+                  proxy_set_header  X-Forwarded-For $remote_addr;
+          }
+  }
+
+  ```
+
+  - Reload Nginx: `sudo systemctl reload nginx`
 
 ## For reference: Docker automation
 
