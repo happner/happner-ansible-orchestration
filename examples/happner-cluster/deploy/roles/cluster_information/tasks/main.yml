@@ -23,17 +23,8 @@
     happn_cluster_ip_info: "{{ happn_cluster_ip_info | union([current_entry])}}"
 
 - name: increment port
-#  set_fact:
-#    happn_cluster_seed_port: "{{ happn_cluster_seed_port | int + 1 }}"
-  local_action: shell file=$((`cat /tmp/host_num` + 1)); echo $file | tee /tmp/host_num
-  register: host_num
-
-- name: Set host number
-  command: 'touch file{{ host_num.stdout }}'
-
-- name: Set happn_cluster_seed_port
   set_fact:
-    happn_cluster_seed_port: "{{host_num | int}}"
+    happn_cluster_seed_port: "{{ happn_cluster_seed_port | int + 1 }}"
 
 - name: show current port number
   debug:
