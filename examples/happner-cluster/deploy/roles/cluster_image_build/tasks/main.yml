@@ -15,9 +15,7 @@
   set_fact:
     counter: 0
     current_seed: false
-    current_internal_ip: ""
-    current_port: ""
-    current_entry: ""
+    current_port: 57000
 
 - name: pull out details for the current host
   set_fact:
