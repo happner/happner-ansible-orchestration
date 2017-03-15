@@ -7,7 +7,7 @@
 
 - name: show ip
   debug:
-    msg: "Current internal IP - {{current_ip.stdout}}"
+    msg: "Current internal IP - {{current_ip}}"
 
 - name: create list item
   vars:
@@ -15,7 +15,7 @@
   set_fact:
     current_entry:
       external: "{{inventory_hostname}}"
-      internal: "{{current_ip.stdout}}"
+      internal: "{{current_ip}}"
       port: "{{happn_cluster_seed_port}}"
 
 - name: add item to list
