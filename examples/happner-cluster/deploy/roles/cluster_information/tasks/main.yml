@@ -24,8 +24,8 @@
 
 - name: populate array of happn_cluster_ip_info
   set_fact:
-    happn_cluster_members: "{{ happn_cluster_ip_info | union([item['ansible_default_ipv4']['address'] + ':' + (happn_cluster_seed_port | string)])}}"
-  with_items: "{{hostvars[groups['all']]}}"
+    happn_cluster_members: "{{ happn_cluster_ip_info | union([hostvars[item]['ansible_eth0']['ipv4']['address'] + ':' + (happn_cluster_seed_port | string)])}}"
+  with_items: "{{ groups['all'] }}"
 
 #- name: add item to list
 #  set_fact:
