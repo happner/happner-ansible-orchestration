@@ -8,7 +8,7 @@
 
 - name: set happn_cluster_config vars
   set_fact:
-    happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.json') | string }}"
+    happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.js') | string }}"
     happn_cluster_app_dir: "{{ happn_cluster_build_dir }}/happn_cluster/examples/happn-cluster/app"
 
 - name: create temp vars
