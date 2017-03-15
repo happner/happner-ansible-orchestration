@@ -26,7 +26,7 @@
 
 - name: pull out details for the current host
   set_fact:
-    current_seed : {{counter == 0}}}
+    current_seed : {{counter == 0}}
     counter : {{counter|int + 1}}
     current_internal_ip : "{{item.internal}}"
     current_port : "{{item.port}}"
