@@ -1,39 +1,44 @@
 
 # get the internal IP of the cloud instance (eg: EC2)
-- name: get instance internal IP
-  shell: >
-    ifconfig eth | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'
-  register: current_ip
+#- name: get instance internal IP
+#  shell: >
+#    ifconfig eth | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'
+#  register: current_ip
 
-- name: show ip
-  debug:
-    msg: "Current internal IP - {{current_ip.stdout}}"
+#- name: show ip
+#  debug:
+#    msg: "Current internal IP - {{current_ip.stdout}}"
 
-- name: create list item
-  vars:
-    current_entry: {external: "", internal: "", port: ""}
+#- name: create list item
+#  vars:
+#    current_entry: {external: "", internal: "", port: ""}
+#  set_fact:
+#    current_entry:
+#      external: "{{inventory_hostname}}"
+#      internal: "{{current_ip.stdout}}"
+#      port: "{{happn_cluster_seed_port}}"
+
+- name: populate array of happn_cluster_ip_info
   set_fact:
-    current_entry:
-      external: "{{inventory_hostname}}"
-      internal: "{{current_ip.stdout}}"
-      port: "{{happn_cluster_seed_port}}"
+    happn_cluster_members: "{{ happn_cluster_ip_info | union([item.address + ':' + (happn_cluster_seed_port | string)])}}"
+  with_items: "{{host_vars}}"
 
-- name: add item to list
-  set_fact:
-    happn_cluster_ip_info: "{{ happn_cluster_ip_info | union([current_entry])}}"
+#- name: add item to list
+#  set_fact:
+#    happn_cluster_ip_info: "{{ happn_cluster_ip_info | union([current_entry])}}"
 
 - name: show ip list
   debug:
     msg: "IP list - {{happn_cluster_ip_info}}"
 
-- name: increment port
-  set_fact:
-    happn_cluster_seed_port: "{{ happn_cluster_seed_port | int + 1 }}"
+#- name: increment port
+#  set_fact:
+#    happn_cluster_seed_port: "{{ happn_cluster_seed_port | int + 1 }}"
+#
+#- name: show current port number
+#  debug:
+#    msg: "Current port number - {{happn_cluster_seed_port}}"
 
-- name: show current port number
-  debug:
-    msg: "Current port number - {{happn_cluster_seed_port}}"
-
-- name: show hostvars
-  debug:
-    msg: "hostvars - {{hostvars}}"
+#- name: show hostvars
+#  debug:
+#    msg: "hostvars - {{hostvars}}"
