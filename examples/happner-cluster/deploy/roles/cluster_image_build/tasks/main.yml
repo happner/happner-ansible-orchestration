@@ -2,6 +2,10 @@
     that:
       - 'happn_cluster_version != ""'
 
+- name: show test vars
+  debug:
+    msg: "Test var - {{test_var}}"
+
 - name: show cluster info gathered from previous playbook
   debug:
     msg: "Info - {{happn_cluster_ip_info}}"
@@ -74,7 +78,7 @@
 - name: copy new config to app directory
   copy:
     content: "{{ happn_cluster_config }}"
-    dest: "{{ happn_cluster_app_dir }}/cluster_config.json"
+    dest: "{{ happn_cluster_app_dir }}/cluster_config.js"
 
 #- name: archive repo
 #  shell: >
