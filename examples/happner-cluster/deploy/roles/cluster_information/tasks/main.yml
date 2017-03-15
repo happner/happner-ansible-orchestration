@@ -2,12 +2,12 @@
 # get the internal IP of the cloud instance (eg: EC2)
 - name: get instance internal IP
   shell: >
-    ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'
+    ifconfig eth | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'
   register: current_ip
 
 - name: show ip
   debug:
-    msg: "Current internal IP - {{current_ip}}"
+    msg: "Current internal IP - {{current_ip.stdout}}"
 
 - name: create list item
   vars:
@@ -15,7 +15,7 @@
   set_fact:
     current_entry:
       external: "{{inventory_hostname}}"
-      internal: "{{current_ip}}"
+      internal: "{{current_ip.stdout}}"
       port: "{{happn_cluster_seed_port}}"
 
 - name: add item to list
