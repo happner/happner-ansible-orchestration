@@ -22,6 +22,7 @@
     | replace('\"#seed\"', (current_seed | string))
     | replace('\"#hosts\"', (happn_cluster_ip_info | to_json))
     | replace('\"#port\"', (current_port | string))
+    | replace('\"#mongoDb\"', (happn_cluster_mongo_db | string))
     | replace('#mongoCollection', (happn_cluster_mongo_collection | string))
     | replace('#mongoUrl', (happn_cluster_mongo_url | string)) }}"
 

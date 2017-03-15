@@ -15,7 +15,7 @@ module.exports = {
                             provider: 'happn-service-mongo-2',
                             isDefault: true,
                             settings: {
-                                database: 'happn-cluster',
+                                database: '#mongoDb',
                                 collection: "#mongoCollection",
                                 url: "#mongoUrl"
                             }
