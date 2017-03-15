@@ -3,5 +3,13 @@
   hosts: all  # this ensures that the playbook is run against ALL hosts before moving to the next playbook
   vars:
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
-  roles:
-    - role: "{{ parent_dir }}/roles/cluster_information"
+  tasks:
+    - name: Create localhost tmp file
+      file: path={{ item.path }} state={{ item.state }}
+      with_items:
+       - { path: '/tmp/host_num', state: 'absent' }
+       - { path: '/tmp/host_num', state: 'touch' }
+
+    - name: Managing tmp files
+      lineinfile: dest=/tmp/host_num line='0'
+
