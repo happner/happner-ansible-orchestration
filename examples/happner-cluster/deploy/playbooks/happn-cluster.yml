@@ -19,7 +19,7 @@
       private: no
     - name: mongo_url
       prompt: "mongo_url"
-      default: "mongodb://0.0.0.0:27017/happn-cluster-test"
+      default: "mongodb://{{inventory_mongo_ip}}:27017/happn-cluster-test"
       private: no
     - name: mongo_collection
       prompt: "mongo_collection"
