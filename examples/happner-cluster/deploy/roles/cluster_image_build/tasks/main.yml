@@ -2,10 +2,6 @@
     that:
       - 'happn_cluster_version != ""'
 
-- name: show test vars
-  debug:
-    msg: "Test var - {{test_var}}"
-
 - name: show cluster info gathered from previous playbook
   debug:
     msg: "Info - {{happn_cluster_ip_info}}"
@@ -17,15 +13,8 @@
 
 - name: create temp vars
   set_fact:
-    counter: 0
-    current_seed: false
+    current_seed: {{inventory_seed}}
     current_port: 57000
-
-- name: pull out details for the current host
-  set_fact:
-    current_seed : "{{counter == 0 | bool}}"
-    counter : "{{counter | int + 1}}"
-  with_items: "{{happn_cluster_ip_info}}"
 
 - name: inject variables into happn_cluster_config
   set_fact:
@@ -35,16 +24,6 @@
     | replace('\"#port\"', (current_port | string))
     | replace('#mongoCollection', (happn_cluster_mongo_collection | string))
     | replace('#mongoUrl', (happn_cluster_mongo_url | string)) }}"
-
-#- name: inject variables into happn_cluster_config
-#  set_fact:
-#    happn_cluster_config: "{{ happn_cluster_config
-#    | replace('\"#seed\"', (current_seed | string))
-#    | replace('\"#hosts\"', (happn_cluster_ip_info | to_json))
-#    | replace('#announceHost', ('abc' | string))
-#    | replace('\"#port\"', (current_port | string))
-#    | replace('#mongoCollection', (happn_cluster_mongo_collection | string))
-#    | replace('#mongoUrl', (happn_cluster_mongo_url | string)) }}"
 
 - name: show cluster config
   debug:
@@ -79,13 +58,6 @@
   copy:
     content: "{{ happn_cluster_config }}"
     dest: "{{ happn_cluster_app_dir }}/cluster_config.js"
-
-#- name: archive repo
-#  shell: >
-#    cd "{{ happn_cluster_build_dir }}/{{ item }}" &&
-#    git archive -o ../{{ item }}.tar HEAD
-#  with_items:
-#    - happn_cluster
 
 - name: archive repo
   shell: >
