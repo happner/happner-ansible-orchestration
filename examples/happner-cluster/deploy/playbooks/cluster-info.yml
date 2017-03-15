@@ -3,7 +3,7 @@
   hosts: all  # this ensures that the playbook is run against ALL hosts before moving to the next playbook
   vars:
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
-  group_vars:
-    - all: "{{ parent_dir }}/group_vars/all"
+  vars_files:
+    - "{{ parent_dir }}/group_vars/all"
   roles:
     - role: "{{ parent_dir }}/roles/cluster_information"
