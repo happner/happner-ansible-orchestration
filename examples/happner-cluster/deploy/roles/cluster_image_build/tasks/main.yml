@@ -19,11 +19,6 @@
     current_port: ""
     current_entry: ""
 
-#- name: create member array
-#  set_fact:
-#    happn_cluster_members: "{{ happn_cluster_members | union([item.internal + ':' + (item.port | string)])}}"
-#  with_items: "{{happn_cluster_ip_info}}"
-
 - name: pull out details for the current host
   set_fact:
     current_seed : "{{counter == 0 | bool}}"
@@ -35,10 +30,19 @@
     happn_cluster_config: "{{ happn_cluster_config
     | replace('\"#seed\"', (current_seed | string))
     | replace('\"#hosts\"', (happn_cluster_ip_info | to_json))
-    | replace('#announceHost', ('abc' | string))
     | replace('\"#port\"', (current_port | string))
     | replace('#mongoCollection', (happn_cluster_mongo_collection | string))
     | replace('#mongoUrl', (happn_cluster_mongo_url | string)) }}"
+
+#- name: inject variables into happn_cluster_config
+#  set_fact:
+#    happn_cluster_config: "{{ happn_cluster_config
+#    | replace('\"#seed\"', (current_seed | string))
+#    | replace('\"#hosts\"', (happn_cluster_ip_info | to_json))
+#    | replace('#announceHost', ('abc' | string))
+#    | replace('\"#port\"', (current_port | string))
+#    | replace('#mongoCollection', (happn_cluster_mongo_collection | string))
+#    | replace('#mongoUrl', (happn_cluster_mongo_url | string)) }}"
 
 - name: show cluster config
   debug:
