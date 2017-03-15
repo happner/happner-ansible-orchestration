@@ -3,5 +3,7 @@
   hosts: all  # this ensures that the playbook is run against ALL hosts before moving to the next playbook
   vars:
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
+    - happn_cluster_ip_info: []
+    - happn_cluster_seed_port: 57000
   roles:
     - role: "{{ parent_dir }}/roles/cluster_information"
