@@ -22,6 +22,10 @@
   set_fact:
     happn_cluster_ip_info: "{{ happn_cluster_ip_info | union([current_entry])}}"
 
+- name: show ip list
+  debug:
+    msg: "IP list - {{happn_cluster_ip_info}}"
+
 - name: increment port
   set_fact:
     happn_cluster_seed_port: "{{ happn_cluster_seed_port | int + 1 }}"
