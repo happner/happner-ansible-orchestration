@@ -13,7 +13,7 @@
 
 - name: create temp vars
   set_fact:
-    current_seed: {{inventory_seed}}
+    current_seed: "{{inventory_seed}}"
     current_port: 57000
 
 - name: inject variables into happn_cluster_config
