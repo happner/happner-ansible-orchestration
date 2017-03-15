@@ -25,3 +25,7 @@
 - name: increment port
   set_fact:
     happn_cluster_seed_port: "{{ happn_cluster_seed_port | int + 1 }}"
+
+- name: show current port number
+  debug:
+    msg: "Current port number - {{happn_cluster_seed_port}}"
