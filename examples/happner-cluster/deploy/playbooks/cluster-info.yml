@@ -4,6 +4,6 @@
   vars:
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
   vars_files:
-    - "{{ parent_dir }}/group_vars/all"
+    - "{{ parent_dir }}/group_vars/all.yml"
   roles:
     - role: "{{ parent_dir }}/roles/cluster_information"
