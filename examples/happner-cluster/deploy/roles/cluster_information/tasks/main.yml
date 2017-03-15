@@ -18,9 +18,9 @@
 #      internal: "{{current_ip.stdout}}"
 #      port: "{{happn_cluster_seed_port}}"
 
-- name: show hostvars
+- name: show groups
   debug:
-    msg: "hostvars - {{hostvars[groups['all']]}}"
+    msg: "groups - {{groups['all']}}"
 
 - name: populate array of happn_cluster_ip_info
   set_fact:
