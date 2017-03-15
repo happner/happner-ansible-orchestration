@@ -5,7 +5,7 @@
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
   tasks:
     - name: Create tmp file
-      connection: local
+      connection: localhost
       file: path={{ item.path }} state={{ item.state }}
       with_items:
        - { path: '/tmp/host_num', state: 'absent' }
