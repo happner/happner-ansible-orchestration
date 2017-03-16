@@ -16,7 +16,7 @@
     current_seed: "{{inventory_seed}}"
     current_port: 57000
     proxy_port: 55000
-    swim_port: 56000/udp
+    swim_port: 56000
 
 - name: inject variables into cluster_config
   set_fact:
@@ -95,6 +95,9 @@
 #    name: "node_{{item.id}}"
     name: "node_x"
     image: "{{ cluster_image_name }}:{{ cluster_extra_tag }}"
-    published_ports: "{{current_port}}:{{current_port}}, {{swim_port}}:{{swim_port}}, {{proxy_port}}:{{proxy_port}}"
+    published_ports:
+      - "{{current_port}}:{{current_port}}"
+      - "{{swim_port}}:{{swim_port}}"
+      - "{{proxy_port}}:{{proxy_port}}/udp"
 
 
