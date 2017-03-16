@@ -3,7 +3,7 @@
  */
 
 var HappnerCluster = require('happner-cluster');
-var config = require('cluster_config');
+var config = require('./cluster_config');
 
 HappnerCluster.create(config)
 
