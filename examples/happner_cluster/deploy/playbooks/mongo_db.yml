@@ -18,7 +18,7 @@
       default: 1
       private: no
   vars:
-    - ports: "12707:12707"
+    - ports: "27017:27017"
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
   roles:
     - role: "{{ parent_dir }}/roles/mongo_image_build"
