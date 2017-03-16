@@ -3,7 +3,7 @@
   hosts: all
 
 # gather all network info for the hosts
-- include: cluster-info.yml
+- include: cluster_info.yml
 
 # main cluster build
 - include: cluster.yml
