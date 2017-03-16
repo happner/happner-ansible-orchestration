@@ -1,0 +1,9 @@
+
+- name: gather network info for all hosts
+  hosts: all
+
+# gather all network info for the hosts
+- include: cluster-info.yml
+
+# main cluster build
+- include: cluster.yml

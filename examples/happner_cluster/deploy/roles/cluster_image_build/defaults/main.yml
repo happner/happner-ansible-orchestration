@@ -1,0 +1,13 @@
+cluster_base_name: cluster/baseimage
+cluster_base_tag: "latest"
+cluster_version: ""
+cluster_build_dir: /tmp/happner-ansible-orchestration
+cluster_repo: https://github.com/happner/happner-ansible-orchestration.git
+cluster_extra_tag: latest
+cluster_image_name: happner_cluster
+cluster_image_tag: "{{ cluster_version }}"
+cluster_mongo_url: "{{ mongo_url }}"
+cluster_mongo_collection: "{{ mongo_collection }}"
+cluster_mongo_db: "{{ mongo_db }}"
+cluster_members: []
+cluster_config: "{{ cluster_config }}"

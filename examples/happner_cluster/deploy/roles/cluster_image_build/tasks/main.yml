@@ -1,0 +1,96 @@
+- assert:
+    that:
+      - 'cluster_version != ""'
+
+- name: show cluster info gathered from previous playbook
+  debug:
+    msg: "Info - {{cluster_ip_info}}"
+
+- name: set cluster_config vars
+  set_fact:
+    cluster_config: "{{ lookup('file', '../templates/cluster_config.js') | string }}"
+    cluster_app_dir: "{{ cluster_build_dir }}/happner_cluster/examples/happner_cluster/app"
+
+- name: create temp vars
+  set_fact:
+    current_seed: "{{inventory_seed}}"
+    current_port: 57000
+
+- name: inject variables into cluster_config
+  set_fact:
+    cluster_config: "{{ cluster_config
+    | replace('\"#seed\"', (current_seed | string))
+    | replace('\"#hosts\"', (cluster_ip_info | to_json))
+    | replace('\"#port\"', (current_port | string))
+    | replace('\"#mongoDb\"', (cluster_mongo_db | string))
+    | replace('#mongoCollection', (cluster_mongo_collection | string))
+    | replace('#mongoUrl', (cluster_mongo_url | string)) }}"
+
+- name: show cluster config
+  debug:
+      msg: "CONFIG - {{ cluster_config }}"
+
+- name: install apt packages
+  apt: "name='{{ item }}' state=present"
+  with_items:
+    - git
+    - python-pip
+
+- name: install docker-py
+  pip: name=docker-py version=1.7.0 state=present
+
+- name: create build directory
+  file: >
+    dest="{{ cluster_build_dir }}"
+    state=directory
+
+### clone the Github repo
+- name: clone happner-cluster git repo
+  git: >
+    repo="{{ cluster_repo }}"
+    dest="{{ cluster_build_dir }}/happner_cluster"
+   # version="v{{ cluster_version }}"
+  register: cluster_repo
+
+- name: remove git deploy key
+  file: dest=/tmp/github_deploy_key state=absent
+
+- name: copy new config to app directory
+  copy:
+    content: "{{ cluster_config }}"
+    dest: "{{ cluster_app_dir }}/cluster_config.js"
+
+- name: archive repo
+  shell: >
+    tar -cvf "{{ cluster_build_dir }}/cluster.tar" --exclude .git -C "{{ cluster_build_dir }}" happner_cluster
+
+- name: generate templates
+  template: >
+    src="{{ item.src }}"
+    dest="{{ cluster_build_dir }}/{{ item.dest }}"
+  with_items:
+    - { src: "Dockerfile", dest: "Dockerfile" }
+
+- name: build image
+  docker_image: >
+    name="{{ cluster_image_name }}"
+    tag="{{ cluster_image_tag }}"
+    path="{{ cluster_build_dir }}"
+    state=build
+
+- name: tag
+  command: >
+    docker tag
+    {{ cluster_image_name }}:{{ cluster_image_tag }}
+    {{ cluster_image_name }}:{{ cluster_extra_tag }}
+  when: cluster_extra_tag != ''
+
+# create a container
+- name: run happn-cluster
+  docker_container:
+#    name: "node_{{item.id}}"
+    name: "node_x"
+    image: "{{ cluster_image_name }}:{{ cluster_extra_tag }}"
+    published_ports: "{{current_port}}:{{current_port}}"
+
+

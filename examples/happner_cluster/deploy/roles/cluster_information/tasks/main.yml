@@ -1,0 +1,17 @@
+
+- name: populate array of cluster_ip_info
+  set_fact:
+    cluster_ip_info: "{{ cluster_ip_info | union([hostvars[item]['ansible_default_ipv4']['address'] + ':' + (cluster_seed_port | string)])}}"
+  with_items: "{{ groups['all'] }}"
+
+- name: show ip list
+  debug:
+    msg: "IP list - {{cluster_ip_info}}"
+
+#- name: increment port
+#  set_fact:
+#    cluster_seed_port: "{{ cluster_seed_port | int + 1 }}"
+#
+#- name: show current port number
+#  debug:
+#    msg: "Current port number - {{cluster_seed_port}}"

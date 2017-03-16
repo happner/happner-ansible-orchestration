@@ -1,0 +1,19 @@
+#
+# SEE:
+# https://fangpenlin.com/posts/2014/08/11/building-docker-image-with-ansible/
+# http://docs.ansible.com/ansible/docker_module.html
+# https://github.com/ansible/ansible/blob/devel/docsite/rst/guide_docker.rst
+
+---
+- name: Build happn-cluster app image
+  hosts: all
+  become: sudo
+  vars:
+    - cluster_version: "{{inventory_cluster_version}}"
+    - mongo_db: "{{inventory_mongo_db}}"
+    - mongo_url: "mongodb://{{inventory_mongo_ip}}:27017"
+    - mongo_collection: "happner_cluster"
+    - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
+  roles:
+    - role: "{{ parent_dir }}/roles/cluster_image_build"
+
