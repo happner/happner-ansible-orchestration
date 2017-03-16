@@ -27,20 +27,18 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 ## Create cluster dir and copy tarball
 RUN mkdir -p home
-COPY happn-cluster.tar home
+COPY happner-cluster.tar home
 
 # extract tarball
-RUN tar -xvf home/happn-cluster.tar -C home
-RUN echo "{{ happn_cluster_image_tag }}" > /home/happn_cluster/version.txt
-RUN echo "{{ happn_cluster_repo.after }}" > /home/happn_cluster/git_revision.txt
+RUN tar -xvf home/happner-cluster.tar -C home
+RUN echo "{{ happn_cluster_image_tag }}" > /home/happner-cluster/version.txt
+RUN echo "{{ happn_cluster_repo.after }}" > /home/happner-cluster/git_revision.txt
 
 # Install npm dependencies
-RUN cd /home/happn_cluster/examples/happn-cluster/app && npm install
-
-#ADD "{{ happn_cluster_app_dir }}/cluster_config.json" /home/happn-cluster/examples/happn-cluster/app
+RUN cd /home/happner-cluster/examples/happner-cluster/app && npm install
 
 ### Set up working directory
-WORKDIR /home/happn_cluster/examples/happn-cluster/app
+WORKDIR /home/happner-cluster/examples/happner-cluster/app
 
 #CMD node server
 CMD ["/bin/bash"]
