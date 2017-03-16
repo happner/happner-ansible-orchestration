@@ -1,4 +1,5 @@
 module.exports = {
+    name: "#name",
     domain: 'DOMAIN_NAME',
     happn: {
         announceHost: "#announceHost",

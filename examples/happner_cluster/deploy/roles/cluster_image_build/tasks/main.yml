@@ -19,6 +19,7 @@
 - name: inject variables into cluster_config
   set_fact:
     cluster_config: "{{ cluster_config
+    | replace('#name', (inventory_name | string))
     | replace('#announceHost', (ansible_default_ipv4.address | string))
     | replace('\"#seed\"', (current_seed | string | lower))
     | replace('\"#hosts\"', (cluster_ip_info | to_json))
