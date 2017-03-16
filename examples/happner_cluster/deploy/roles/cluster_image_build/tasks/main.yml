@@ -99,7 +99,7 @@
       - "{{current_port}}:{{current_port}}"
       - "{{swim_port}}:{{swim_port}}"
       - "{{proxy_port}}:{{proxy_port}}/udp"
-    exposed_ports:
+    ports:
       - "{{current_port}}:{{current_port}}"
       - "{{swim_port}}:{{swim_port}}"
       - "{{proxy_port}}:{{proxy_port}}/udp"
