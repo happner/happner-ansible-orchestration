@@ -9,7 +9,7 @@
 - name: set happn_cluster_config vars
   set_fact:
     happn_cluster_config: "{{ lookup('file', '../templates/cluster_config.js') | string }}"
-    happn_cluster_app_dir: "{{ happn_cluster_build_dir }}/happn_cluster/examples/happn-cluster/app"
+    happn_cluster_app_dir: "{{ happn_cluster_build_dir }}/happner-cluster/examples/happner-cluster/app"
 
 - name: create temp vars
   set_fact:
@@ -45,10 +45,10 @@
     state=directory
 
 ### clone the Github repo
-- name: clone happn-cluster git repo
+- name: clone happner-cluster git repo
   git: >
     repo="{{ happn_cluster_repo }}"
-    dest="{{ happn_cluster_build_dir }}/happn_cluster"
+    dest="{{ happn_cluster_build_dir }}/happner-cluster"
    # version="v{{ happn_cluster_version }}"
   register: happn_cluster_repo
 
