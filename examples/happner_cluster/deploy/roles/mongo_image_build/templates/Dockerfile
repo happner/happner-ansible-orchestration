@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 
 ### This doesn't need exposing as the Ansible playbook will set up the ports
-#EXPOSE 12707
+#EXPOSE 27017
 
 CMD mongod
 
