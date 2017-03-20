@@ -11,3 +11,4 @@ cluster_mongo_collection: "{{ mongo_collection }}"
 cluster_mongo_db: "{{ mongo_db }}"
 cluster_members: []
 cluster_config: "{{ cluster_config }}"
+cluster_build_version: "{{ cluster_version }}"
