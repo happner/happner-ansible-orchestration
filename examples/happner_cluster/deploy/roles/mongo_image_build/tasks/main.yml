@@ -40,5 +40,6 @@
 - name: run mongo_instance
   docker_container:
     name: "mongo-instance"
+    restart_policy: always
     image: "{{ mongo_instance_image_name }}:{{ mongo_instance_extra_tag }}"
     published_ports: "{{ ports }}"
