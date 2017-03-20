@@ -5,6 +5,8 @@
 var HappnerCluster = require('happner-cluster');
 var config = require('./cluster_config');
 
+process.exit(1);
+
 HappnerCluster.create(config)
 
   .catch(function (error) {

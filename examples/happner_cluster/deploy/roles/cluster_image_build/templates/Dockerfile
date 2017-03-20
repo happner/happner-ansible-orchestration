@@ -45,7 +45,7 @@ RUN cd /home/happner_cluster/examples/happner_cluster/app && npm install
 ### Set up working directory
 WORKDIR /home/happner_cluster/examples/happner_cluster/app
 
-CMD node server > server.log
+CMD node server >> server.log
 #CMD ["/bin/bash"]
 
 # Clean up APT when done.
