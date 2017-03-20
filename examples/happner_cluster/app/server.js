@@ -5,11 +5,15 @@
 var HappnerCluster = require('happner-cluster');
 var config = require('./cluster_config');
 
-//process.exit(1);
+console.log('RESTART: ', Date.now());
+
+return setTimeout(function () {
+    process.exit(1);
+}, 200);
 
 HappnerCluster.create(config)
 
-  .catch(function (error) {
-    console.error(error);
-    process.exit(1);
-  });
+    .catch(function (error) {
+        console.error(error);
+        process.exit(1);
+    });
