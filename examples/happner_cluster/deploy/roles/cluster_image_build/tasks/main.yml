@@ -14,7 +14,7 @@
 - name: create temp vars
   set_fact:
     current_seed: "{{inventory_seed}}"
-    current_port: 57000
+    happn_port: 57000
     proxy_port: 55000
     swim_port: 56000
 
@@ -25,7 +25,6 @@
     | replace('#announceHost', (ansible_default_ipv4.address | string))
     | replace('\"#seed\"', (current_seed | string | lower))
     | replace('\"#hosts\"', (cluster_ip_info | to_json))
-    | replace('\"#port\"', (current_port | string))
     | replace('#mongoDb', (cluster_mongo_db | string))
     | replace('#mongoCollection', (cluster_mongo_collection | string))
     | replace('#mongoUrl', (cluster_mongo_url | string)) }}"
@@ -98,8 +97,6 @@
 #    log_driver: syslog
     image: "{{ cluster_image_name }}:{{ cluster_extra_tag }}"
     ports:
-      - "{{current_port}}:{{current_port}}"
-      - "{{swim_port}}:{{swim_port}}"
-      - "{{proxy_port}}:{{proxy_port}}/udp"
-
-
+      - "{{happn_port}}:{{happn_port}}"
+      - "{{swim_port}}:{{swim_port}}/udp"
+      - "{{proxy_port}}:{{proxy_port}}"
