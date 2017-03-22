@@ -1,3 +1,5 @@
+// #version
+
 module.exports = {
     name: "#name",
     domain: 'DOMAIN_NAME',
