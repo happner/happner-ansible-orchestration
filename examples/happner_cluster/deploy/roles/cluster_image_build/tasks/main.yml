@@ -10,6 +10,7 @@
   set_fact:
     cluster_config: "{{ lookup('file', '../templates/cluster_config.js') | string }}"
     cluster_app_dir: "{{ cluster_build_dir }}/happner_cluster/examples/happner_cluster/app"
+    cluster_template_dir: "{{ cluster_build_dir }}/happner_cluster/examples/happner_cluster/deploy/roles/cluster_image_build/templates"
 
 - name: create temp vars
   set_fact:
@@ -63,6 +64,11 @@
   copy:
     content: "{{ cluster_config }}"
     dest: "{{ cluster_app_dir }}/cluster_config.js"
+
+- name: copy package.json to app directory
+  copy:
+    src: "{{ cluster_template_dir }}/{{ cluster_build_version }}/package.json"
+    dest: "{{ cluster_app_dir }}/package.json"
 
 - name: archive repo
   shell: >
