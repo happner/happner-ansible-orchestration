@@ -8,7 +8,7 @@
 
 - name: set cluster_config vars
   set_fact:
-    cluster_config: "{{ lookup('file', '../templates/cluster_config.js') | string }}"
+    cluster_config: "{{ lookup('file', '../templates/config.js') | string }}"
     cluster_app_dir: "{{ cluster_build_dir }}/happner_cluster/examples/happner_cluster/app"
 
 - name: create temp vars
@@ -62,7 +62,7 @@
 - name: copy new config to app directory
   copy:
     content: "{{ cluster_config }}"
-    dest: "{{ cluster_app_dir }}/cluster_config.js"
+    dest: "{{ cluster_app_dir }}/config.js"
 
 - name: copy package.json to app directory
   copy:

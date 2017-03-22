@@ -3,13 +3,7 @@
  */
 
 var HappnerCluster = require('happner-cluster');
-var config = require('./cluster_config');
-
-//console.log('RESTART: ', Date.now());
-//
-//return setTimeout(function () {
-//    process.exit(1);
-//}, 200);
+var config = require('./config');
 
 HappnerCluster.create(config)
 
