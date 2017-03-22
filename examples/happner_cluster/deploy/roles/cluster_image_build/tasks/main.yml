@@ -67,7 +67,7 @@
 
 - name: copy package.json to app directory
   copy:
-    src: "{{ cluster_template_dir }}/{{ cluster_build_version }}/package.json"
+    src: "../templates/{{ cluster_build_version }}/package.json"
     dest: "{{ cluster_app_dir }}/package.json"
 
 - name: archive repo
