@@ -1,6 +1,8 @@
 // #version
 
+var web = require('./web');
 var modules = require('./modules');
+var components = require('./components');
 
 module.exports = {
   name: "#name",
@@ -37,6 +39,7 @@ module.exports = {
       }
     }
   },
-  modules: modules.modules,
-  components: modules.components
+  web: web,
+  modules: modules,
+  components: components
 };

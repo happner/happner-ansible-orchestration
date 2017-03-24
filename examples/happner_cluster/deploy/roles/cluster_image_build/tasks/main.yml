@@ -69,10 +69,20 @@
     src: "../templates/{{ cluster_build_version }}/package.json"
     dest: "{{ cluster_app_dir }}/package.json"
 
+- name: copy web.js to app directory
+  copy:
+    src: "../templates/{{ cluster_build_version }}/web.js"
+    dest: "{{ cluster_app_dir }}/web.js"
+
 - name: copy modules.js to app directory
   copy:
     src: "../templates/{{ cluster_build_version }}/modules.js"
     dest: "{{ cluster_app_dir }}/modules.js"
+
+- name: copy components.js to app directory
+  copy:
+    src: "../templates/{{ cluster_build_version }}/components.js"
+    dest: "{{ cluster_app_dir }}/components.js"
 
 - name: archive repo
   shell: >
