@@ -5,6 +5,7 @@ var modules = require('./modules');
 var components = require('./components');
 
 module.exports = {
+  version: "#version",
   name: "#name",
   domain: 'DOMAIN_NAME',
   happn: {

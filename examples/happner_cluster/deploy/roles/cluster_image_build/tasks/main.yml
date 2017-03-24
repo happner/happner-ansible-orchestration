@@ -30,9 +30,9 @@
     | replace('#mongoCollection', (cluster_mongo_collection | string))
     | replace('#mongoUrl', (cluster_mongo_url | string)) }}"
 
-- name: show cluster config
-  debug:
-      msg: "CONFIG - {{ cluster_config }}"
+#- name: show cluster config
+#  debug:
+#      msg: "CONFIG - {{ cluster_config }}"
 
 - name: install apt packages
   apt: "name='{{ item }}' state=present"
