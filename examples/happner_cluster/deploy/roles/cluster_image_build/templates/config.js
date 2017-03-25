@@ -24,6 +24,25 @@ module.exports = {
           }
         }
       },
+      connect: {
+        config: {
+          middleware: {
+            security: {
+              exclusions: [
+                "/",
+                "/css/*",
+                "/js/*",
+                "/fonts/*",
+                "/angular/*",
+                "/components/*",
+                "/img/*",
+                "/icons/*",
+                "/favicon.ico"
+              ]
+            }
+          }
+        }
+      },
       data: {
         config: {
           datastores: [
