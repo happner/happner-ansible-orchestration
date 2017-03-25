@@ -12,7 +12,7 @@
     - cluster_version: "{{inventory_cluster_version}}"
     - mongo_db: "{{inventory_mongo_db}}"
     - mongo_url: "mongodb://{{inventory_mongo_ip}}:27017"
-    - mongo_collection: "happner_cluster"
+    - mongo_collection: "{{inventory_mongo_collection}}"
     - parent_dir: "{{ lookup('pipe','cd ../ && pwd') | string }}" # dynamically find the parent directory
   roles:
     - role: "{{ parent_dir }}/roles/cluster_image_build"
