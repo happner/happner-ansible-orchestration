@@ -14,7 +14,16 @@ module.exports = {
       requestTimeout: 10 * 1000,
       responseTimeout: 10 * 1000
     },
+    secure: true,
     services: {
+      security: {
+        config: {
+          adminUser: {
+            username: "_ADMIN",
+            password: "#adminPassword"
+          }
+        }
+      },
       data: {
         config: {
           datastores: [

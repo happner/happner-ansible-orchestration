@@ -24,6 +24,7 @@
     | replace('#version', (cluster_build_version | string))
     | replace('#name', (inventory_name | string))
     | replace('#announceHost', (ansible_default_ipv4.address | string))
+    | replace('#adminPassword', (inventory_admin_password | string))
     | replace('\"#seed\"', (current_seed | string | lower))
     | replace('\"#hosts\"', (cluster_ip_info | to_json))
     | replace('#mongoDb', (cluster_mongo_db | string))
